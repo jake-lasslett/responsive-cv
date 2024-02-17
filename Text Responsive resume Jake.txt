@@ -1,0 +1,137 @@
+========== HEADER ==========
+.nav__logo
+JAKE
+
+========== HOME ==========
+.home__name
+HELLO, I’M <br>
+JAKE LASSLETT
+
+.home__profession
+DATA <br>
+SCIENTIST
+
+
+========== ABOUT ==========
+.section__title
+PERSONAL INFO
+
+Hi, I'm Jake Lasslett, a Data Analyst and Data Scientist
+adept in statistical analysis, data mining, and visualization
+using Python, SQL, and R. My role at Wesfarmers Health, 
+marked by key contributions in customer segmentation and
+advanced reporting, demonstrates my skill in turning complex
+data into strategic, actionable insights. I also just really,
+really like data.
+
+.about__button
+Download CV
+
+.about__social
+GitHub - Linkedin
+
+https://github.com/
+https://www.linkedin.com/
+
+========== SKILLS ==========
+.section__title
+SKILLS
+
+.resume__title
+Python
+SQL
+R
+Google Cloud Platform (GCP)
+BigQuery & Looker
+Verison Control (Bitbucket)
+
+Bootstrap
+Figma
+
+
+========== EDUCATION ==========
+.section__title
+EDUCATION
+
+.resume__title .resume__data
+Master's of Data Science
+James Cook University
+2021 - 2023
+View
+
+Graduate Diploma of Data Science
+James Cook University
+2021 - 2023
+View
+
+Graduate Certificate of Data Science
+James Cook University
+2021 - 2022
+View
+
+Bachelor's of Science
+La Trobe University
+2013 - 2015
+View
+
+========== WORK ==========
+.section__title
+WORK EXPERIENCE
+
+.resume__title .resume__data
+Data Analyst
+Wesfarmers Health / 2022 - Present
+Led a key Customer Segmentation Initiative using BigQuery and A/B testing, enhancing loyalty program through personalized offers.
+Built Real-Time Reporting Systems from scratch with Google Looker/BigQuery, improving decision-making across various business metrics.
+Developed Unified Data Models to ensure consistent and reliable data across departments.
+Contributed to Agile Transformation Projects, including transitioning data streams to Google Cloud Platform, upgrading data infrastructure.
+Provided Business Insights, focusing on leveraging Google Analytics for improving eCommerce strategies.
+
+Stability Trial Chemist
+Ego Pharmaceuticals / 2021 - 2022
+Actively reviewing stability data with stakeholders to ensure proper testing and reporting to perform root cause analysis.
+Performing wet chemistry and instrument based (HPLC, GC, XRF) analytical tests on all Ego products according to international pharmacopoeia standards (BP, USP) or internally developed methods.
+Finalise confidential and in-depth stability and compatibility reports with interpreted data in the labor field and doing quality work.
+
+Quality Control Specialist
+CosmaxNBT Australia / 2017 - 2021
+Managed sampling for all stages of production and coordinated with external labs for raw material testing.
+Oversaw creation and maintenance of QC documentation, including SOPs and test methods.
+Configured and optimized LIMS (StarLIMS) to enhance laboratory efficiency.
+Conducted chemical and HPLC tests on various materials, ensuring compliance with international pharmacopoeia standards.
+
+========== CERTIFICATES ==========
+.section__title
+CERTIFICATES
+
+.resume__title .resume__data
+
+## I don't have any lol
+Google Analytics Certification
+Google (Skillshop) -  2023
+View
+
+========== REFERENCES ==========
+.section__title
+REFERENCES
+
+.resume__title .resume__data
+Meurant Naude
+Data Engineer Team Lead / Wesfarmers Health
+Contact details availble upon request
+
+Galina Kagan McBride
+Data Analytics Team Lead / Wesfarmers Health
+Contact details availble upon request
+
+
+========== FOOTER ==========
+.footer__title .footer__info
+PHONE
++61 400 532 949
+
+EMAIL
+jakelaz94@gmail.com
+
+WEBSITE
+www.mywebsite.com
