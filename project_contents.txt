@@ -1,0 +1,1457 @@
+--- Capturing files in: C:\Users\jakel\Documents\Side_projects\Resume Website\responsive-resume-cv-jake ---
+
+======================================================================
+File: capture_project_files.py
+======================================================================
+
+import os
+import sys
+import argparse
+
+def capture_project_files(project_path, output_filename):
+    """
+    Captures text file contents within a project directory, acknowledging binary files.
+    Includes debug printing and smart directory/file skipping.
+
+    Args:
+        project_path (str): The path to the project directory.
+        output_filename (str): The name of the file to save the output to.
+    """
+    # --- Basic Path Validation ---
+    if not os.path.isdir(project_path):
+        print(f"Error: The provided path '{project_path}' is not a valid directory.", file=sys.stderr)
+        return
+
+    project_abspath = os.path.abspath(project_path)
+    output_abspath = os.path.abspath(output_filename)
+    file_count = 0
+
+    # --- Lists of items to explicitly exclude ---
+    EXCLUDED_DIRS = {'.git', '.vscode', '__pycache__', 'node_modules', 'venv', '.idea'}
+    EXCLUDED_FILES = {'.DS_Store'}
+    
+    # --- Extensions of binary files to acknowledge but not print content for ---
+    BINARY_EXTENSIONS = {
+        # Images
+        '.png', '.jpg', '.jpeg', '.gif', '.bmp', '.ico', '.svg', '.webp',
+        # Documents
+        '.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx',
+        # Archives
+        '.zip', '.tar', '.gz', '.rar', '.7z',
+        # Executables & binaries
+        '.exe', '.dll', '.bin', '.so', '.o',
+        # Fonts
+        '.ttf', '.otf', '.woff', '.woff2',
+        # Media
+        '.mp3', '.mp4', '.avi', '.mov', '.wav',
+    }
+
+    print("--- Starting Project Capture ---", file=sys.stderr)
+    print(f"Project directory: {project_abspath}", file=sys.stderr)
+    print(f"Output file: {output_abspath}", file=sys.stderr)
+    print("-" * 30, file=sys.stderr)
+
+    try:
+        with open(output_filename, 'w', encoding='utf-8') as output_file:
+            output_file.write(f"--- Capturing files in: {project_abspath} ---\n\n")
+
+            for root, dirs, files in os.walk(project_path, topdown=True):
+                # DEBUG: Show which directory is being processed
+                print(f"[Scanning]: {root}", file=sys.stderr)
+                dirs[:] = [d for d in dirs if d not in EXCLUDED_DIRS]
+
+                for filename in files:
+                    if filename in EXCLUDED_FILES:
+                        continue
+                    
+                    file_path = os.path.join(root, filename)
+
+                    if os.path.abspath(file_path) == output_abspath:
+                        continue
+
+                    file_count += 1
+                    relative_path = os.path.relpath(file_path, project_path)
+                    _, file_extension = os.path.splitext(filename)
+                    is_binary = file_extension.lower() in BINARY_EXTENSIONS
+                    
+                    # Write file header for all files
+                    output_file.write("=" * 70 + "\n")
+                    output_file.write(f"File: {relative_path}\n")
+                    output_file.write("=" * 70 + "\n\n")
+
+                    if is_binary:
+                        # Acknowledge the binary file but don't print its content
+                        print(f"  [i] Acknowledging binary file: {relative_path}", file=sys.stderr)
+                        output_file.write(f"[Content of binary file type ({file_extension}) is not captured.]\n\n\n")
+                    else:
+                        # Process as a text file
+                        print(f"  [+] Capturing text content: {relative_path}", file=sys.stderr)
+                        try:
+                            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                                contents = f.read()
+                                output_file.write(contents)
+                        except Exception as e:
+                            output_file.write(f"Could not read file. Reason: {e}\n")
+                        
+                        output_file.write("\n\n")
+
+    except IOError as e:
+        print(f"FATAL ERROR: Could not write to output file '{output_filename}'. Reason: {e}", file=sys.stderr)
+        return
+
+    # --- Final Summary ---
+    print("-" * 30, file=sys.stderr)
+    if file_count > 0:
+        print(f"✅ Success! Processed {file_count} files and saved to '{output_filename}'")
+    else:
+        print(f"⚠️ Warning: No files were found in the project directory.", file=sys.stderr)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Capture project text files and acknowledge binary files, saving the result to a text file."
+    )
+    parser.add_argument(
+        "project_path",
+        nargs="?",
+        default=".",
+        help="The path to the project directory (defaults to the current directory).",
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        default="project_contents.txt",
+        help="The name of the output file (defaults to 'project_contents.txt').",
+    )
+    args = parser.parse_args()
+    capture_project_files(args.project_path, args.output)
+
+======================================================================
+File: index.html
+======================================================================
+
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== FAVICON ===============-->
+      <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.4.0/remixicon.css" crossorigin="">
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="assets/css/styles.css">
+
+      <title>Jake Lasslett - Data Extraordinaire</title>
+   </head>
+   <body>
+      <div class="resume container">
+         <!--==================== HEADER ====================-->
+         <header class="header" id="header">
+            <nav class="nav container">
+               <a href="#" class="nav__logo">Jake</a>
+
+               <div class="nav__menu">
+                  <ul class="nav__list">
+                     <li class="nav__item">
+                        <a href="#home" class="nav__link active-link">
+                           <i class="ri-home-2-line"></i>
+                        </a>
+                     </li>
+                     <li class="nav__item">
+                        <a href="#about" class="nav__link">
+                           <i class="ri-user-line"></i>
+                        </a>
+                     </li>
+                     <li class="nav__item">
+                        <a href="#skills" class="nav__link">
+                           <i class="ri-file-list-line"></i>
+                        </a>
+                     </li>
+                     <li class="nav__item">
+                        <a href="#education" class="nav__link">
+                           <i class="ri-book-2-line"></i>
+                        </a>
+                     </li>
+                     <li class="nav__item">
+                        <a href="#work" class="nav__link">
+                           <i class="ri-briefcase-3-line"></i>
+                        </a>
+                     </li>
+                  </ul>
+               </div>
+
+               <!--======= Theme button =========-->
+               <i class="ri-moon-line change-theme" id="theme-button"></i>
+            </nav>
+         </header>
+   
+         <!--==================== MAIN ====================-->
+         <main class="resume__main">
+            <!--==================== HOME ====================-->
+            <section class="home" id="home">
+               <div class="home__container grid">
+                  <h1 class="home__name">
+                     HELLO, I'M <br>
+                     JAKE LASSLETT
+                  </h1>
+                  
+                  <div class="home__blob">
+                     <div class="home__perfil">
+                        <img src="assets/img/perfil.png" alt="home image" class="home__img">
+                     </div>
+
+                     <svg class="home__star-1" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M25 0L31.7523 18.2477L50 25L31.7523 31.7523L25 
+                        50L18.2477 31.7523L0 25L18.2477 18.2477L25 0Z" />
+                     </svg>
+
+                     <svg class="home__star-2" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M25 0L31.7523 18.2477L50 25L31.7523 31.7523L25 
+                        50L18.2477 31.7523L0 25L18.2477 18.2477L25 0Z" />
+                     </svg>
+                  </div>
+
+                  <h1 class="home__profession">
+                     DATA <br>
+                     SCIENTIST
+                  </h1>
+               </div>
+            </section>
+
+            <div class="resume__left">
+               <!--==================== ABOUT ====================-->
+               <section class="about section" id="about">
+                  <h2 class="section__title">PERSONAL INFO</h2>
+
+                  <div class="about__container grid">
+                     <p>
+                        Hi, I'm Jake Lasslett, a Data Analyst and Data Scientist
+                        adept in statistical analysis, data mining, and visualization
+                        using Python, SQL, and R. My role at Wesfarmers Health, 
+                        marked by key contributions in customer segmentation and
+                        advanced reporting, demonstrates my skill in turning complex
+                        data into strategic, actionable insights. I also just really,
+                        really like data.
+                     </p>
+
+                     <a href="assets/pdf/Jake_Lasslett-CV.pdf" class="about__button">
+                        Download CV <i class="ri-download-line"></i>
+                     </a>
+
+                     <ul class="about__social">
+                        <li>
+                           <a href="https://github.com/jake-lasslett" target="_blank" class="about__social-link">Github</a>
+                        </li>
+
+                        <li>
+                           <a href="https://www.linkedin.com/in/jakelasslett/" target="_blank" class="about__social-link">Linkedin</a>
+                        </li>
+                     </ul>
+                  </div>
+               </section>
+      
+               <!--==================== SKILLS ====================-->
+               <section class="skills section" id="skills">
+                  <h2 class="section__title">SKILLS</h2>
+
+                  <div class="skills__container">
+                     <div class="skills__content">
+                        <ul class="skills__list">
+                           <li class="resume__title">
+                              <i class="ri-arrow-drop-right-line"></i>Python
+                           </li>
+                           <li class="resume__title">
+                              <i class="ri-arrow-drop-right-line"></i>SQL
+                           </li>
+                           <li class="resume__title">
+                              <i class="ri-arrow-drop-right-line"></i>R
+                           </li>
+                           <li class="resume__title">
+                              <i class="ri-arrow-drop-right-line"></i>Google Cloud Platform
+                           </li>
+                        </ul>
+
+                        <ul class="skills__list">
+                           <li class="resume__title">
+                              <i class="ri-arrow-drop-right-line"></i>BigQuery & Looker
+                           </li>
+                           <li class="resume__title">
+                              <i class="ri-arrow-drop-right-line"></i>Verison Control
+                           </li>
+                           <li class="resume__title">
+                              <i class="ri-arrow-drop-right-line"></i>Data Storytelling
+                           </li>
+                           <li class="resume__title">
+                              <i class="ri-arrow-drop-right-line"></i>Project Delivery
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+
+               </section>
+      
+               <!--==================== EDUCATION ====================-->
+               <section class="education section" id="education">
+                  <h2 class="section__title">EDUCATION</h2>
+
+                  <div class="education__container grid">
+                     <div>
+                        <h2 class="resume__title">
+                           <i class="ri-arrow-drop-right-line"></i>Master's of Data Science
+                        </h2>
+
+                        <div class="resume__data">
+                           <span>James Cook University</span>
+
+                           <span>2021 - 2023</span>
+
+                           <a href="https://www.myequals.net/sharelink/44544868-aa91-47cf-872f-75224fd87ae5/04292d36-195c-4077-a82e-e1e9fe864c48" target="_blank" class="resume__button-link">
+                              View <i class="ri-external-link-line"></i>
+                           </a>
+                        </div>
+                     </div>
+                     <div>
+                        <h2 class="resume__title">
+                           <i class="ri-arrow-drop-right-line"></i>Graduate Diploma of Data Science
+                        </h2>
+
+                        <div class="resume__data">
+                           <span>James Cook University</span>
+
+                           <span>2021 - 2023</span>
+
+                           <a href="https://www.myequals.net/r/sharelink/8b1735f3-a7eb-401f-9f8e-3c0ceb6ec4a8/74da0cc5-af51-43cf-82f6-00fa72527386" target="_blank" class="resume__button-link">
+                              View <i class="ri-external-link-line"></i>
+                           </a>
+                        </div>
+                     </div>
+                     <div>
+                        <h2 class="resume__title">
+                           <i class="ri-arrow-drop-right-line"></i>Graduate Certificate of Data Science
+                        </h2>
+
+                        <div class="resume__data">
+                           <span>James Cook University</span>
+
+                           <span>2021 - 2022</span>
+
+                           <a href="https://www.myequals.net/sharelink/679cf72b-a8ac-4bf0-836d-454958a512d6/4b12f6be-d0e3-4a89-916e-3eaab9ad640b" target="_blank" class="resume__button-link">
+                              View <i class="ri-external-link-line"></i>
+                           </a>
+                        </div>
+                     </div>
+                     <div>
+                        <h2 class="resume__title">
+                           <i class="ri-arrow-drop-right-line"></i>Bachelor's of Science
+                        </h2>
+
+                        <div class="resume__data">
+                           <span>La Trobe University</span>
+
+                           <span>2013 - 2015</span>
+
+                           <a href="/assets/pdf/Jake_Bsc_LaTrobe.pdf" target="_blank" class="resume__button-link">
+                              View <i class="ri-external-link-line"></i>
+                           </a>
+                        </div>
+                     </div>
+                  </div>
+               </section>
+            </div>
+
+            <div class="resume__right">
+               <!--==================== WORK ====================-->
+               <section class="work section" id="work">
+                  <h2 class="section__title">WORK EXPERIENCE</h2>
+
+                  <div class="work__container grid">
+                     <div>
+                        <h2 class="resume__title">
+                           <i class="ri-arrow-drop-right-line"></i>Data Analyst
+                        </h2>
+
+                        <div class="resume__data">
+                           <span>Wesfarmers Health / 2022 - Present                           </span>
+
+                           <p>
+                              Led a key Customer Segmentation Initiative using BigQuery and A/B testing, enhancing loyalty program through personalized offers.
+                           </p>
+                           <p>
+                              Built Real-Time Reporting Systems from scratch with Google Looker/BigQuery, improving decision-making across various business metrics.
+                           </p>
+                           <p>
+                              Developed Unified Data Models to ensure consistent and reliable data across departments.
+                           </p>
+                           <p>
+                              Contributed to Agile Transformation Projects, including transitioning data streams to Google Cloud Platform, upgrading data infrastructure.
+                           </p>
+                           <p>
+                              Provided Business Insights, focusing on leveraging Google Analytics for improving eCommerce strategies.
+                           </p>
+                        </div>
+                     </div>
+
+                     <div>
+                        <h2 class="resume__title">
+                           <i class="ri-arrow-drop-right-line"></i>Stability Trial Chemist
+                        </h2>
+
+                        <div class="resume__data">
+                           <span>Ego Pharmaceuticals / 2021 - 2022</span>
+
+                           <p>
+                              Actively reviewing stability data with stakeholders to ensure proper testing and reporting to perform root cause analysis.
+                           </p>
+                           <p>
+                              Performing wet chemistry and instrument based (HPLC, GC, XRF) analytical tests on all Ego products according to international pharmacopoeia standards (BP, USP) or internally developed methods.
+                           </p>
+                           <p>
+                              Finalise confidential and in-depth stability and compatibility reports with interpreted data in the labor field and doing quality work.
+                           </p>
+                        </div>
+                     </div>
+
+                     <div>
+                        <h2 class="resume__title">
+                           <i class="ri-arrow-drop-right-line"></i>Quality Control Specialist
+                        </h2>
+
+                        <div class="resume__data">
+                           <span>CosmaxNBT Australia / 2017 - 2021                           </span>
+
+                           <p>
+                              Managed sampling for all stages of production and coordinated with external labs for raw material testing.
+                           </p>
+                           <p>
+                              Oversaw creation and maintenance of QC documentation, including SOPs and test methods.
+                           </p>
+                           <p>
+                              Configured and optimized LIMS (StarLIMS) to enhance laboratory efficiency.
+                           </p>
+                           <p>
+                              Conducted chemical and HPLC tests on various materials, ensuring compliance with international pharmacopoeia standards.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </section>
+      
+               <!-- ==================== CERTIFICATES ====================-->
+               <section class="certificates section">
+                  <h2 class="section__title">CERTIFICATES</h2>
+
+                  <div class="certificates__container grid">
+                     <div>
+                        <h2 class="resume__title">
+                           <i class="ri-arrow-drop-right-line"></i>Google Analytics Certification
+
+                        </h2>
+
+                        <div class="resume__data">
+                           <span>Google (Skillshop) -  2023</span>
+
+                           <a href="https://skillshop.credential.net/6de74762-c24a-4fff-99ab-1e6828835bdc" target="_blank" class="resume__button-link">
+                              View <i class="ri-external-link-line"></i>
+                           </a>
+                        </div>
+                     </div>
+                  </div>
+               </section>
+       
+               <!--==================== REFERENCES ====================-->
+               <section class="references section">
+                  <h2 class="section__title">REFERENCES</h2>
+
+                  <div class="references__container grid">
+
+                     <div>
+                        <h2 class="resume__title">
+                           <i class="ri-arrow-drop-right-line"></i>Meurant Naude
+                        </h2>
+
+                        <div class="resume__data">
+                           <span>Data Engineer Team Lead / Wesfarmers Health
+                           </span>
+
+                           <p>
+                              Contact details available upon request. 
+                              <ul class="references__social">
+                                 <li>
+                                    <a href="https://www.linkedin.com/in/meurantnaude/" target="_blank" class="references__social-link"><i class="ri-linkedin-fill"></i></a>
+                                 </li>
+                              </ul>
+                           </p>
+                        </div>
+                     </div>
+                     <div>
+                        <h2 class="resume__title">
+                           <i class="ri-arrow-drop-right-line"></i>Galina Kagan McBride
+                        </h2>
+
+                        <div class="resume__data">
+                           <span>Data Analytics Team Lead / Wesfarmers Health
+                           </span>
+
+                           <p>
+                              Contact details available upon request. 
+                              <ul class="references__social">
+                                 <li>
+                                    <a href="https://www.linkedin.com/in/galinakagan/" target="_blank" class="references__social-link"><i class="ri-linkedin-fill"></i></a>
+                                 </li>
+                              </ul>
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </section>
+            </div>
+         </main>
+   
+         <!--==================== FOOTER ====================-->
+         <footer class="footer">
+            <div class="footer__container grid">
+               <div>
+                  <h3 class="footer__title">PHONE</h3>
+                  <span class="footer__info">+61 400 532 949</span>
+               </div>
+
+               <div>
+                  <h3 class="footer__title">EMAIL</h3>
+                  <span class="footer__info">jakelaz94@gmail.com</span>
+               </div>
+
+               <div>
+                  <h3 class="footer__title">WEBSITE</h3>
+                  <a href="https://jakelasslett.netlify.app" target="_blank" class="footer__link">jakelasslett.netlify.app</a>
+               </div>
+            </div>
+            
+         </footer>
+      </div>
+
+      <!--========== SCROLL UP ==========-->
+      <a href=" " class="scrollup" id="scroll-up">
+         <i class="ri-arrow-up-line"></i>
+      </a>
+
+      <!--=============== MAIN JS ===============-->
+      <script src="assets/js/main.js"></script>
+   </body>
+</html>
+
+======================================================================
+File: preview.png
+======================================================================
+
+[Content of binary file type (.png) is not captured.]
+
+
+======================================================================
+File: README.md
+======================================================================
+
+# Responsive Resume Website Juk
+## [Watch it on youtube](https://youtu.be/J_bE5FeWREA)
+### Responsive Resume Website Anne
+
+- Responsive Resume Website Design Using HTML CSS & JavaScript
+- Contains a mobile navigation with icons.
+- Smooth scrolling in each section in mobile version.
+- Includes a light and dark theme.
+- Developed first with the Mobile First methodology, then for desktop.
+- Compatible with all mobile devices and with a beautiful and pleasant user interface.
+
+💙 Join the channel to see more videos like this. [Bedimcode](https://www.youtube.com/@Bedimcode)
+
+![preview img](/preview.png)
+
+
+======================================================================
+File: Text Responsive resume Jake.txt
+======================================================================
+
+========== HEADER ==========
+.nav__logo
+JAKE
+
+========== HOME ==========
+.home__name
+HELLO, I’M <br>
+JAKE LASSLETT
+
+.home__profession
+DATA <br>
+SCIENTIST
+
+
+========== ABOUT ==========
+.section__title
+PERSONAL INFO
+
+Hi, I'm Jake Lasslett, a Data Analyst and Data Scientist
+adept in statistical analysis, data mining, and visualization
+using Python, SQL, and R. My role at Wesfarmers Health, 
+marked by key contributions in customer segmentation and
+advanced reporting, demonstrates my skill in turning complex
+data into strategic, actionable insights. I also just really,
+really like data.
+
+.about__button
+Download CV
+
+.about__social
+GitHub - Linkedin
+
+https://github.com/
+https://www.linkedin.com/
+
+========== SKILLS ==========
+.section__title
+SKILLS
+
+.resume__title
+Python
+SQL
+R
+Google Cloud Platform (GCP)
+BigQuery & Looker
+Verison Control (Bitbucket)
+
+Bootstrap
+Figma
+
+
+========== EDUCATION ==========
+.section__title
+EDUCATION
+
+.resume__title .resume__data
+Master's of Data Science
+James Cook University
+2021 - 2023
+View
+
+Graduate Diploma of Data Science
+James Cook University
+2021 - 2023
+View
+
+Graduate Certificate of Data Science
+James Cook University
+2021 - 2022
+View
+
+Bachelor's of Science
+La Trobe University
+2013 - 2015
+View
+
+========== WORK ==========
+.section__title
+WORK EXPERIENCE
+
+.resume__title .resume__data
+Data Analyst
+Wesfarmers Health / 2022 - Present
+Led a key Customer Segmentation Initiative using BigQuery and A/B testing, enhancing loyalty program through personalized offers.
+Built Real-Time Reporting Systems from scratch with Google Looker/BigQuery, improving decision-making across various business metrics.
+Developed Unified Data Models to ensure consistent and reliable data across departments.
+Contributed to Agile Transformation Projects, including transitioning data streams to Google Cloud Platform, upgrading data infrastructure.
+Provided Business Insights, focusing on leveraging Google Analytics for improving eCommerce strategies.
+
+Stability Trial Chemist
+Ego Pharmaceuticals / 2021 - 2022
+Actively reviewing stability data with stakeholders to ensure proper testing and reporting to perform root cause analysis.
+Performing wet chemistry and instrument based (HPLC, GC, XRF) analytical tests on all Ego products according to international pharmacopoeia standards (BP, USP) or internally developed methods.
+Finalise confidential and in-depth stability and compatibility reports with interpreted data in the labor field and doing quality work.
+
+Quality Control Specialist
+CosmaxNBT Australia / 2017 - 2021
+Managed sampling for all stages of production and coordinated with external labs for raw material testing.
+Oversaw creation and maintenance of QC documentation, including SOPs and test methods.
+Configured and optimized LIMS (StarLIMS) to enhance laboratory efficiency.
+Conducted chemical and HPLC tests on various materials, ensuring compliance with international pharmacopoeia standards.
+
+========== CERTIFICATES ==========
+.section__title
+CERTIFICATES
+
+.resume__title .resume__data
+
+## I don't have any lol
+Google Analytics Certification
+Google (Skillshop) -  2023
+View
+
+========== REFERENCES ==========
+.section__title
+REFERENCES
+
+.resume__title .resume__data
+Meurant Naude
+Data Engineer Team Lead / Wesfarmers Health
+Contact details availble upon request
+
+Galina Kagan McBride
+Data Analytics Team Lead / Wesfarmers Health
+Contact details availble upon request
+
+
+========== FOOTER ==========
+.footer__title .footer__info
+PHONE
++61 400 532 949
+
+EMAIL
+jakelaz94@gmail.com
+
+WEBSITE
+www.mywebsite.com
+
+
+======================================================================
+File: assets\css\styles.css
+======================================================================
+
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --title-color: hsl(40, 48%, 12%);
+  --text-color: hsl(40, 24%, 24%);
+  --body-color: hsl(40, 4%, 88%);
+  --container-color: hsl(40, 48%, 88%);
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: "Montserrat", sans-serif;
+  --biggest-font-size: 1.75rem;
+  --h2-font-size: 1.25rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .875rem;
+
+  /*========== Font weight ==========*/
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+/*========== Responsive typography ==========*/
+@media screen and (min-width: 1024px) {
+  :root {
+    --biggest-font-size: 3.75rem;
+    --normal-font-size: 1rem;
+    --small-font-size: .938rem;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  font-weight: var(--font-medium);
+  background-color: var(--container-color);
+  color: var(--text-color);
+  transition: background .4s;
+}
+
+h1, h2, h3, h4 {
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/*=============== THEME ===============*/
+.change-theme{
+  font-size: 1.25rem;
+  color: var(--title-color);
+  cursor: pointer;
+}
+
+/*========== Variables Dark theme ==========*/
+body.dark-theme{
+  --title-color: hsl(40, 48%, 90%);
+  --text-color: hsl(40, 12%, 70%);
+  --body-color: hsl(40, 12%, 16%);
+  --container-color: hsl(40, 20%, 8%);
+}
+
+/*========== 
+	Color changes in some parts of 
+	the website, in dark theme
+==========*/
+.dark-theme :is(nav__menu, .scrollup){
+  background-color: hsl(40, 20%, 12%)
+}
+
+.dark-theme .home__profession{
+  text-shadow: 0 0 6px hsl(40, 20%, 12%);
+}
+
+
+.dark-theme::-webkit-scrollbar{
+  background-color: hsl(40, 16%, 15%);
+}
+
+.dark-theme::-webkit-scrollbar-thumb{
+  background-color: hsl(40, 16%, 25%);
+}
+
+.dark-theme::-webkit-scrollbar:hover{
+  background-color: hsl(40, 16%, 35%);
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+  max-width: 1024px;
+  margin-inline: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.section {
+  padding-block: 5rem 1rem;
+}
+
+.section__title {
+  width: max-content;
+  margin: 0 auto 2.5rem;
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-semi-bold);
+  border-bottom: 2px solid var(--title-color);
+  padding-bottom: .75rem;
+}
+
+/*=============== RESUME ===============*/
+.resume__title{
+  font-size: var(--normal-font-size);
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: .25rem;
+}
+
+.resume__title i{
+  font-size: 1.5rem;
+  font-weight: initial;
+}
+
+.resume__data{
+  display: grid;
+  row-gap: .5rem;
+  padding-left: 1.5rem;
+  font-size: var(--small-font-size);
+}
+
+.resume__button-link{
+  width: max-content;
+  color: var(--text-color);
+  display: inline-flex;
+  column-gap: .25rem;
+  font-weight: var(--font-semi-bold);
+}
+
+.resume__button-link:hover{
+  text-decoration: underline;
+}
+/*=============== HEADER & NAV ===============*/
+.header{
+  position: fixed;
+  width: 100%;
+  background-color: var(--container-color);
+  top: 0;
+  left: 0;
+  z-index: var(--z-fixed);
+  transition: background .4s;
+}
+
+.nav{
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--title-color);
+}
+
+.nav__logo{
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+}
+/* Navigation for mobile devices */
+@media screen and (max-width: 1023px){
+  .nav__menu{
+    position: fixed;
+    bottom: 1.5rem;
+    left: 0;
+    right: 0;
+    background-color: var(--container-color);
+    box-shadow: 0 4px 24px hsla(40, 48%, 4%, .25);
+    margin-inline: 1.5rem;
+    border-radius: .5rem;
+    padding: 1.25rem 3rem;
+    transition: background .4s;
+  }
+}
+
+.nav__list{
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav__link{
+  position: relative;
+  font-size: 1.25rem;
+  color: var(--title-color);
+}
+
+.nav__link::after{
+  content: '';
+  position: absolute;
+  width: 32px;
+  height: 2px;
+  background-color: var(--title-color);
+  left: -6px;
+  bottom: -8px;
+  transition: transform .3s, opacity .3s;
+  opacity: 0;
+}
+
+.nav__link:hover::after{
+  opacity: 1;
+  transform: translate(-4px);
+}
+
+/* Active link */
+.active-link::after{
+opacity: 1;
+transform: translateY(-4px);
+}
+
+
+/*=============== HOME ===============*/
+.home__container{
+  padding-top: 7.4rem;
+  text-align: center;
+  row-gap: 0;
+}
+
+.home__name,
+.home__profession{
+  font-size: var(--biggest-font-size);
+  font-weight: var(--font-semi-bold);
+  letter-spacing: 2px;
+}
+
+.home__name{
+  margin-bottom: .25rem;
+}
+
+.home__blob{
+  position: relative;
+  justify-self: center;
+}
+
+.home__perfil{
+  width: 230px;
+  height: 270px;
+  background: linear-gradient(132deg,
+              hsl(45, 6%, 70%) 25%,
+              hsl(30, 12%, 50%) 105%);
+  border-radius: 15rem 15rem 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.home__img{
+  width: 205px;
+  transform: translateY(1px);
+}
+
+.home__star-1,
+.home__star-2{
+  position: absolute;
+  width: 50px;
+  fill: var(--title-color);
+  transition: fill .4s;
+}
+
+.home__star-1{
+  top: 2.5rem;
+  left: -3rem;
+  rotate: 15deg;
+}
+
+.home__star-2{
+  right: -3rem;
+  bottom: .75rem;
+}
+
+.home__profession{
+  transform: translateY(-1.2rem);
+}
+/*=============== ABOUT ===============*/
+.about__button{
+  width: max-content;
+  color: var(--title-color);
+  font-size: var(--small-font-size);
+  font-weight: var(--font-semi-bold);
+  display: flex;
+  align-items: center;
+  column-gap: .5rem;
+}
+
+.about__button i{
+  font-size: 1rem;
+}
+
+.about__button:hover,
+.about__social-link:hover{
+  text-decoration: underline;
+}
+
+.about__social{
+  display: flex;
+  column-gap: 1rem;
+}
+
+.about__social-link{
+  color: var(--title-color);
+  font-size: var(--small-font-size);
+  font-weight: var(--font-semi-bold);
+}
+
+/*=============== SKILLS ===============*/
+.skills__content,
+.skills__list{
+  display: grid;
+}
+
+.skills__content{
+  grid-template-columns: repeat(2, max-content);
+  align-items: baseline;
+  column-gap: -0.1rem;
+}
+
+.skills__list{
+  row-gap: 1rem;
+}
+
+.skills__list li{
+  margin: 0;
+}
+/*=============== EDUCATION ===============*/ 
+/* To add code or make changes to the section */
+
+
+/*=============== WORK ===============*/ 
+/* To add code or make changes to the section */
+
+
+/*=============== CERTIFICATES ===============*/ 
+/* To add code or make changes to the section */
+
+
+/*=============== REFERENCES ===============*/ 
+/* To add code or make changes to the section */
+.references__social{
+  display: flex;
+  column-gap: 1rem;
+}
+
+.references__social-link{
+  color: var(--title-color);
+  font-size: var(--small-font-size);
+  font-weight: var(--font-semi-bold);
+}
+
+/*=============== FOOTER ===============*/
+.footer{
+  padding-block: 2.5rem 8rem;
+}
+
+.footer__container{
+  border-top: 2px solid var(--title-color);
+  padding-top: 1.5rem;
+  grid-template-columns: repeat(2, max-content);
+  justify-content: space-between;
+  row-gap: 2.5rem;
+}
+
+.footer__title{
+  font-size: var(--normal-font-size);
+  margin-bottom: .5rem;
+}
+
+.footer__info,
+.footer__link{
+  font-size: var(--small-font-size);
+}
+
+.footer__link{
+  color: var(--text-color);
+}
+
+.footer__link:hover{
+text-decoration: underline;}
+
+/*=============== SCROLL BAR ===============*/
+::-webkit-scrollbar{
+  width: .6rem;
+  border-radius: .5rem;
+  background-color: hsl(40, 16%, 75%);
+}
+
+::-webkit-scrollbar-thumb{
+  border-radius: .5rem;
+  background-color: hsl(40, 16%, 65%);
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background-color: hsl(40, 16%, 55%);
+}
+
+/*=============== SCROLL UP ===============*/
+
+.scrollup{
+  position: fixed;
+  right: 1rem;
+  bottom: -50%;
+  background-color: var(--container-color);
+  box-shadow: 0 4px 16px hsla(40, 48%, 4%, .15);
+  display: inline-flex;
+  padding: 6px;
+  font-size: 1.25rem;
+  color: var(--title-color);
+  border-radius: .25rem;
+  z-index: var(--z-tooltip);
+  transition: bottom .4s, transform .4s, background .4s;
+  ;
+}
+
+.scrollup:hover{
+  transform: translateY(-.25rem);
+}
+
+/* Show Scroll Up */
+.show-scroll{
+  bottom: 7rem;
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 350px){
+  .container{
+    margin-inline: 1rem;
+  }
+
+  .nav__menu{
+    padding-inline: 2rem;
+  }
+
+  .home__star-1{
+    left: 0;
+  }
+
+  .home__star-2{
+    right: -.5rem;
+  }
+
+  .skills__content{
+    grid-template-columns: max-content;
+    row-gap: 1rem;
+  }
+
+  .footer__container{
+  grid-template-columns: max-content;
+  row-gap: 1.5rem;
+  }
+
+}
+
+
+/* For medium devices */
+@media screen and (min-width: 576px){
+  .nav__menu{
+    width: 320px;
+    margin-inline: auto;
+  }
+
+  .footer__container{
+    grid-template-columns: repeat(3, max-content);
+  }
+
+  .show-scroll{
+    bottom: 3rem;
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+  .section{
+    padding-top: 2.5rem;
+  }
+
+  .section__title{
+    margin: 0 0 2rem;
+  }
+
+  .resume__main{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .resume__left,
+  .resume__right{
+    padding-inline: 1.5rem;
+  }
+
+  .header{
+    position: initial;
+  }
+
+  .nav{
+    margin: 0;
+  }
+
+  .nav__menu{
+    display: none;
+  }
+
+  .nav__menu,
+  .scrollup{
+    display: none;
+  }
+
+  .home{
+    grid-column: 1 / 3;
+  }
+
+  .home__container{
+    padding-top: 3rem;
+  }
+
+  .footer{
+    padding-block: 2.5rem 2rem;
+  }
+}
+/* For large devices */
+@media screen and (min-width: 1024px) {
+  body{
+    background-color: var(--body-color);
+    margin-block: 3rem;
+  }
+
+  .resume{
+    background-color: var(--container-color);
+    box-shadow: 0 0 48px hsla(40, 48%, 12%, .2);
+    margin-inline: auto;
+    transition: background .4s;
+  }
+
+  .resume__main{
+    grid-template-columns: 376px 1fr;
+  }
+
+  .dark-theme .resume{
+    box-shadow: 0 0 48px hsla(40, 48%, 4%, .4);
+  }
+
+  .nav{
+    height: calc(var(--header-height) + 1.5rem);
+    margin-inline: 1.5rem;
+  }
+
+  .home__name{
+    margin-bottom: .5rem;
+  }
+
+  .home__perfil{
+    width: 280px;
+    height: 320px;
+  }
+
+  .home__img{
+    width: 245px;
+  }
+
+  .home__star-1,
+  .home__star-2{
+    width: 70px;
+  }
+
+  .home__star-1{
+    left: -10rem;
+  }
+  
+  .home__star-2{
+    right: -8.5rem;
+    bottom: 2rem;
+  }
+
+  .home__profession{
+    transform: translateY(-2rem);
+  }
+
+  .certificates__container,
+  .references__container{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer__container{
+    margin-inline: 1.5rem;
+    padding-top: 2rem;
+  }
+}
+
+======================================================================
+File: assets\img\favicon.png
+======================================================================
+
+[Content of binary file type (.png) is not captured.]
+
+
+======================================================================
+File: assets\img\perfil.png
+======================================================================
+
+[Content of binary file type (.png) is not captured.]
+
+
+======================================================================
+File: assets\img\star.svg
+======================================================================
+
+[Content of binary file type (.svg) is not captured.]
+
+
+======================================================================
+File: assets\js\main.js
+======================================================================
+
+/*=============== SHOW SCROLL UP ===============*/ 
+const scrollUp = () =>{
+	const scrollUp = document.getElementById('scroll-up')
+    // When the scroll is higher than 350 viewport height, add the show-scroll class to the a tag with the scrollup class
+	this.scrollY >= 350 ? scrollUp.classList.add('show-scroll')
+						: scrollUp.classList.remove('show-scroll')
+}
+window.addEventListener('scroll', scrollUp)
+
+/*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
+const sections = document.querySelectorAll('section[id]')
+    
+const scrollActive = () =>{
+  	const scrollDown = window.scrollY
+
+	sections.forEach(current =>{
+		const sectionHeight = current.offsetHeight,
+			  sectionTop = current.offsetTop - 58,
+			  sectionId = current.getAttribute('id'),
+			  sectionsClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']')
+
+		if(scrollDown > sectionTop && scrollDown <= sectionTop + sectionHeight){
+			sectionsClass.classList.add('active-link')
+		}else{
+			sectionsClass.classList.remove('active-link')
+		}                                                    
+	})
+}
+window.addEventListener('scroll', scrollActive)
+
+/*=============== DARK LIGHT THEME ===============*/ 
+const themeButton = document.getElementById('theme-button')
+const darkTheme = 'dark-theme'
+const iconTheme = 'ri-sun-line'
+
+// Previously selected topic (if user selected)
+const selectedTheme = localStorage.getItem('selected-theme')
+const selectedIcon = localStorage.getItem('selected-icon')
+
+// We obtain the current theme that the interface has by validating the dark-theme class
+const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
+const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'ri-moon-line' : 'ri-sun-line'
+
+// We validate if the user previously chose a topic
+if (selectedTheme) {
+  // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
+  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
+  themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](iconTheme)
+}
+
+// Activate / deactivate the theme manually with the button
+themeButton.addEventListener('click', () => {
+    // Add or remove the dark / icon theme
+    document.body.classList.toggle(darkTheme)
+    themeButton.classList.toggle(iconTheme)
+    // We save the theme and the current icon that the user chose
+    localStorage.setItem('selected-theme', getCurrentTheme())
+    localStorage.setItem('selected-icon', getCurrentIcon())
+})
+
+======================================================================
+File: assets\pdf\certificate.pdf
+======================================================================
+
+[Content of binary file type (.pdf) is not captured.]
+
+
+======================================================================
+File: assets\pdf\college-degree.pdf
+======================================================================
+
+[Content of binary file type (.pdf) is not captured.]
+
+
+======================================================================
+File: assets\pdf\Jake_Bsc_LaTrobe.pdf
+======================================================================
+
+[Content of binary file type (.pdf) is not captured.]
+
+
+======================================================================
+File: assets\pdf\Jake_Lasslett-CV.pdf
+======================================================================
+
+[Content of binary file type (.pdf) is not captured.]
+
+
