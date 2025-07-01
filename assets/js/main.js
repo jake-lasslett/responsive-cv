@@ -65,3 +65,16 @@ themeButton.addEventListener('click', () => {
     localStorage.setItem('selected-theme', getCurrentTheme())
     localStorage.setItem('selected-icon', getCurrentIcon())
 })
+
+/*=============== GENERATE PDF ===============*/
+// PDF generated area
+const pdfArea = document.querySelector('.resume.container');
+const pdfButton = document.getElementById('download-pdf-btn');
+
+// Function to trigger the browser's print dialog
+const generatePdf = () => {
+    window.print();
+}
+
+// Add event listener to the button
+pdfButton.addEventListener('click', generatePdf);

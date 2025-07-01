@@ -602,3 +602,122 @@ text-decoration: underline;}
     padding-top: 2rem;
   }
 }
+
+/*==================== PRINT STYLES (UPDATED FOR COMPACT LAYOUT) ====================*/
+@media print {
+  /* --- 1. Force Browser to Print Background Colors & Images --- */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* --- 2. Basic Page Setup --- */
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* --- 3. Hide Elements Not Needed for PDF --- */
+  .header, .nav__menu, .scrollup, .change-theme, .about__button, .home__star-1, .home__star-2 {
+    display: none !important;
+  }
+  
+  /* --- 4. Reset Main Layout for Single Column --- */
+  .resume {
+    margin: 0;
+    padding: 1.5rem;
+    box-shadow: none;
+  }
+
+  .resume__main {
+    display: block; /* Convert from grid to single column */
+  }
+
+  .resume__left, .resume__right {
+    padding: 0;
+  }
+
+  .section {
+    padding-block: 0.8rem; /* SQUEEZE: Reduced space between sections */
+  }
+
+  .section__title {
+    margin-bottom: 1.2rem; /* SQUEEZE: Reduced space below titles */
+  }
+  
+  /* --- 5. Style Profile Image and Header for Print --- */
+  .home {
+    padding-top: 1rem !important; /* SQUEEZE: Reduced top padding */
+  }
+  
+  .home__container {
+    padding-top: 0;
+    gap: 0.8rem; /* SQUEEZE: Reduced gap in the home section */
+  }
+
+  .home__blob {
+    display: block; 
+    margin: 0 auto 1rem auto; /* SQUEEZE: Reduced space below image */
+    width: 140px; /* SQUEEZE: Slightly smaller image */
+    height: 140px;
+  }
+
+  .home__perfil {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid var(--text-color);
+    background: none;
+    overflow: hidden;
+  }
+
+  .home__img {
+    transform: none;
+  }
+  
+  .home__name, .home__profession {
+    text-align: center;
+  }
+
+  .home__profession {
+    transform: none;
+  }
+
+  /* --- 6. Style Social Links & Footer for Print --- */
+  .about__social {
+    display: flex !important;
+    justify-content: center;
+    gap: 1.5rem;
+    padding-left: 0;
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  /* Style all links to be clickable in the PDF */
+  .about__social-link,
+  .footer__link,
+  .resume__button-link {
+    color: var(--text-color) !important;
+    text-decoration: underline !important;
+    font-weight: var(--font-semi-bold) !important;
+  }
+
+  /* Restyle the footer and prevent it from starting on a new page */
+  .footer {
+    display: block !important;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+    border-top: 1px solid #cccccc; /* SQUEEZE: Thinner border */
+    page-break-before: avoid !important; /* SQUEEZE: This is the key rule to prevent a page break before the footer */
+  }
+
+  .footer__container {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem 2rem;
+    padding: 0;
+    border-top: none;
+  }
+}
