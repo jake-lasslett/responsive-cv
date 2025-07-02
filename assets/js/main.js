@@ -1,80 +1,75 @@
-/*=============== SHOW SCROLL UP ===============*/ 
-const scrollUp = () =>{
-	const scrollUp = document.getElementById('scroll-up')
-    // When the scroll is higher than 350 viewport height, add the show-scroll class to the a tag with the scrollup class
-	this.scrollY >= 350 ? scrollUp.classList.add('show-scroll')
-						: scrollUp.classList.remove('show-scroll')
-}
-window.addEventListener('scroll', scrollUp)
+// Wait for the entire HTML document to be loaded before running the script
+document.addEventListener('DOMContentLoaded', () => {
 
-/*=============== SCROLL SECTIONS ACTIVE LINK (OPTIMIZED WITH INTERSECTION OBSERVER) ===============*/
-const sections = document.querySelectorAll('section[id]')
-    
-const observer = new IntersectionObserver((entries) => {
+  // UTILITY FUNCTION: Debounce (limits how often a function can run)
+  function debounce(func, delay = 20) {
+    let timeoutId;
+    return function(...args) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        func.apply(this, args);
+      }, delay);
+    };
+  }
+
+  /*=============== SHOW SCROLL UP ===============*/
+  const scrollUp = () => {
+    const scrollUpButton = document.getElementById('scroll-up');
+    if (scrollUpButton) {
+      window.scrollY >= 350 ? scrollUpButton.classList.add('show-scroll')
+                            : scrollUpButton.classList.remove('show-scroll');
+    }
+  };
+  window.addEventListener('scroll', debounce(scrollUp));
+
+  /*=============== SCROLL SECTIONS ACTIVE LINK (OPTIMIZED) ===============*/
+  const sections = document.querySelectorAll('section[id]');
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        const id = entry.target.getAttribute('id');
-        const navLink = document.querySelector(`.nav__menu a[href*=${id}]`);
-
-        if (entry.isIntersecting) {
-            // Remove active class from all links first
-            document.querySelectorAll('.nav__menu a').forEach(link => {
-                link.classList.remove('active-link');
-            });
-            // Add active class to the intersecting section's link
-            if (navLink) {
-                navLink.classList.add('active-link');
-            }
+      const id = entry.target.getAttribute('id');
+      const navLink = document.querySelector(`.nav__menu a[href*=${id}]`);
+      if (entry.isIntersecting) {
+        document.querySelectorAll('.nav__menu a').forEach(link => link.classList.remove('active-link'));
+        if (navLink) {
+          navLink.classList.add('active-link');
         }
+      }
     });
-}, { 
-    // Adjust rootMargin to trigger the change slightly before the section is at the very top
-    rootMargin: '-40% 0px -60% 0px' 
+  }, { rootMargin: '-40% 0px -60% 0px' });
+
+  sections.forEach(section => observer.observe(section));
+
+  /*=============== DARK LIGHT THEME ===============*/
+  const themeButton = document.getElementById('theme-button');
+  const darkTheme = 'dark-theme';
+  const sunIcon = 'ri-sun-line';
+  const moonIcon = 'ri-moon-line';
+  const savedTheme = localStorage.getItem('selected-theme');
+
+  const applyTheme = (theme) => {
+    document.body.classList.toggle(darkTheme, theme === 'dark');
+    if (themeButton) {
+      themeButton.classList.toggle(sunIcon, theme !== 'dark');
+      themeButton.classList.toggle(moonIcon, theme === 'dark');
+    }
+    localStorage.setItem('selected-theme', theme);
+  };
+  
+  applyTheme(savedTheme || 'dark'); // Default to dark mode if no theme is saved
+
+  if (themeButton) {
+    themeButton.addEventListener('click', () => {
+      const newTheme = document.body.classList.contains(darkTheme) ? 'light' : 'dark';
+      applyTheme(newTheme);
+    });
+  }
+  
+  /*=============== GENERATE PDF ===============*/
+  const pdfButton = document.getElementById('download-pdf-btn');
+  if (pdfButton) {
+    pdfButton.addEventListener('click', () => {
+      window.print();
+    });
+  }
+
 });
-
-sections.forEach(section => {
-    observer.observe(section);
-});
-
-
-/*=============== DARK LIGHT THEME ===============*/ 
-const themeButton = document.getElementById('theme-button')
-const darkTheme = 'dark-theme'
-const iconTheme = 'ri-sun-line'
-
-// Previously selected topic (if user selected)
-const selectedTheme = localStorage.getItem('selected-theme')
-const selectedIcon = localStorage.getItem('selected-icon')
-
-// We obtain the current theme that the interface has by validating the dark-theme class
-const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
-const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'ri-moon-line' : 'ri-sun-line'
-
-// We validate if the user previously chose a topic
-if (selectedTheme) {
-  // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
-  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
-  themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](iconTheme)
-}
-
-// Activate / deactivate the theme manually with the button
-themeButton.addEventListener('click', () => {
-    // Add or remove the dark / icon theme
-    document.body.classList.toggle(darkTheme)
-    themeButton.classList.toggle(iconTheme)
-    // We save the theme and the current icon that the user chose
-    localStorage.setItem('selected-theme', getCurrentTheme())
-    localStorage.setItem('selected-icon', getCurrentIcon())
-})
-
-/*=============== GENERATE PDF ===============*/
-// PDF generated area
-const pdfArea = document.querySelector('.resume.container');
-const pdfButton = document.getElementById('download-pdf-btn');
-
-// Function to trigger the browser's print dialog
-const generatePdf = () => {
-    window.print();
-}
-
-// Add event listener to the button
-pdfButton.addEventListener('click', generatePdf);
