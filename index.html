@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Jake Lasslett - Google Data Engineer & Architect</title>
-    <meta name="description" content=" Google Data Engineer and Architect based in Melbourne, specialising in high-impact Google Cloud solutions and architectural consultancy.">
+    <title>Jake Lasslett - Solution Architect</title>
+    <meta name="description" content="Solution Architect at PMY Group, based in Melbourne. Designing cloud data platforms for major sports, venue and entertainment clients across GCP, AWS and Azure.">
     <meta name="author" content="Jake Lasslett">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://jakelasslett.netlify.app/">
-    <meta property="og:title" content="Jake Lasslett - Google Data Engineer">
-    <meta property="og:description" content="Delivering robust, scalable data architecture and AI-enabled solutions on Google Cloud Platform.">
+    <meta property="og:title" content="Jake Lasslett - Solution Architect">
+    <meta property="og:description" content="Solution Architect at PMY Group, delivering scalable, multi-cloud data platforms and AI-enabled solutions for sports and entertainment clients.">
     <meta property="og:image" content="https://jakelasslett.netlify.app/assets/img/preview.png">
 
     <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
@@ -43,7 +43,7 @@
             <section class="home" id="home">
                 <div class="home__container grid">
                     <div class="home__intro">
-                        <span class="home__badge"> Consultant | Google Solutions</span>
+                        <span class="home__badge"> Solution Architect | PMY Group</span>
                         <h1 class="home__name">HELLO, I'M <br> JAKE LASSLETT</h1>
                     </div>
                     <div class="home__blob">
@@ -53,7 +53,7 @@
                         <svg class="home__star-1" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><path d="M25 0L31.7523 18.2477L50 25L31.7523 31.7523L25 50L18.2477 31.7523L0 25L18.2477 18.2477L25 0Z" /></svg>
                         <svg class="home__star-2" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><path d="M25 0L31.7523 18.2477L50 25L31.7523 31.7523L25 50L18.2477 31.7523L0 25L18.2477 18.2477L25 0Z" /></svg>
                     </div>
-                    <h1 class="home__profession">GOOGLE DATA<br>ENGINEER & ARCHITECT</h1>
+                    <h1 class="home__profession">SOLUTION<br>ARCHITECT</h1>
                 </div>
             </section>
 
@@ -63,7 +63,7 @@
                         <h2 class="section__title">A bit about me</h2>
                         <div class="about__container">
                             <p>Hi, I'm Jake! 👋 I'm a Google Cloud specialist who loves building data solutions that actually make life easier for people. I'm at my best when I'm taking a complex business problem and turning it into something elegant, efficient, and - most importantly - useful.</p>
-                            <p>In my consulting work, I've had the chance to deliver across a variety of models, from rapid Proof of Concepts (POCs) and Executive Demos to full T&M Engagements, Fixed Fee outcomes, and strategic Tender Responses. Whether I'm architecting cloud platforms or diving into the data engineering details, I focus on delivering work that lasts.</p>
+                            <p>As a Solution Architect at PMY Group, I design cloud data platforms for some of the biggest names in sport, venues and entertainment - from the AFL and Brisbane Broncos to the Australian Grand Prix, Tennis Australia and Euroleague Basketball. I work fluently across GCP, AWS and Azure, and I've delivered every engagement model going: rapid POCs and executive demos through to full T&M, fixed-fee builds and strategic tender responses. Whether I'm architecting the platform or deep in the data engineering, I focus on delivering work that lasts.</p>
                             <p>When I'm not behind a screen at work, you'll probably find me tinkering with my home server - I recently spun up a React.js and Tailwind app in Docker just to master GTM and GA4 tracking - staying active with some exercise, or spending time with my partner as we start the exciting journey of growing our family.</p>
                             <div class="about__buttons">
                                 <a class="about__button" id="download-pdf-btn">Download Resume <i class="ri-download-line"></i></a>
@@ -79,15 +79,35 @@
                         <h2 class="section__title">My journey so far</h2>
                         <ul class="experience__container grid">
                             <li>
+                                <h2 class="resume__title"><i class="ri-arrow-drop-right-line"></i> Solution Architect</h2>
+                                <div class="resume__data">
+                                    <span>PMY Group / 2025 - Present</span>
+                                    <p>As a Solution Architect in PMY's data &amp; technology practice, I design and deliver cloud data platforms for major sports, venue and entertainment clients across GCP, AWS and Azure - including the AFL, Brisbane Broncos, Australian Grand Prix Corporation, Tennis Australia, Melbourne Park and Football Victoria. I author the solution architecture documents that anchor these builds, and I lead delivery across the full spectrum: serverless ingestion pipelines, warehouse-native ELT, single customer views and reusable, productised platform assets.</p>
+
+                                    <div class="resume__project">
+                                        <h3 class="resume__project-title">Euroleague Basketball — Live Venue-to-Cloud Stats Ingestion</h3>
+                                        <span class="resume__project-meta">Remote (Europe) | 2025 | Proof of Concept &amp; Solution Design</span>
+                                        <p>I designed and built a serverless GCP pipeline that ingests live play-by-play directly from the venue, running in parallel with a legacy on-prem SQL Server system and reimplementing its stored-procedure statistics logic in the cloud. Built on Cloud Run, Pub/Sub (per-game ordering keys), Cloud SQL and BigQuery with Cloud Armor and KMS, it scales to ~20 concurrent games and enforces a contractual, GDPR-ready data-exposure delay. I authored the full Solution Architecture Document.</p>
+                                    </div>
+
+                                    <div class="resume__project">
+                                        <h3 class="resume__project-title">Football Victoria — Unified Data Platform (Foundations)</h3>
+                                        <span class="resume__project-meta">Melbourne, Australia | 2025 | Fixed-Fee Delivery</span>
+                                        <p>I delivered Phase 1 of a lean, governed Unified Data Platform on GCP, adapting the proven NBL pattern for a smaller organisation. Cloud Run jobs and Cloud Scheduler land five sources (MailChimp, Play Football, Go Football, DRIBL, INTIX) into a GCS/BigQuery medallion architecture, with Dataform transforms building a Single Customer View and governed CDP, participation and ticketing datamarts. Provisioned end-to-end with Terraform (Cloud Foundation Fabric) and GitHub Actions CI/CD via Workload Identity Federation.</p>
+                                    </div>
+
+                                </div>
+                            </li>
+                            <li>
                                 <h2 class="resume__title"><i class="ri-arrow-drop-right-line"></i> Google Data Engineer & Architect</h2>
                                 <div class="resume__data">
-                                    <span>NCS Group Australia / 2025 - Present</span>
+                                    <span>NCS Group Australia / 2024 - 2025</span>
                                     <p>As a Technical Leader within the Google Solutions Practice, I drive architectural excellence by developing modular, reusable assets and standardised service delivery frameworks. Beyond project execution, I play a critical role in strategic pre-sales and high-value tender responses - recently leading a $5M+ AI-enabled warehouse architecture proposal in Singapore. I am a key contributor to internal knowledge sharing, building the technical blueprints that enable our teams to deliver consistent, scalable cloud outcomes for global enterprise clients.</p>
 
                                     <div class="resume__project">
-                                        <h3 class="resume__project-title">National Basketball League (NBL) — Data Platform Foundations & Reliability</h3>
-                                        <span class="resume__project-meta">Melbourne, Australia | March 2025 – Current | Managed Service Agreement</span>
-                                        <p>I contribute to the engineering foundations of the NBL's cloud-native GCP ecosystem, focusing on platform reliability and ingestion scalability. I developed robust, high-performance ingestion functions and architected a dedicated Terraform-managed test sandbox for safe pipeline experimentation. Additionally, I built an automated monitoring framework to proactively identify Dataform job failures, ensuring data integrity and platform stability across the broader "Customer 360" landscape.</p>
+                                        <h3 class="resume__project-title">National Basketball League (NBL) — Platform Foundations &amp; Reliability</h3>
+                                        <span class="resume__project-meta">Melbourne, Australia | 2025 – Current | Managed Service Agreement</span>
+                                        <p>I contribute to the engineering foundations of the NBL's cloud-native GCP ecosystem, focusing on platform reliability and ingestion scalability. I developed robust, high-performance ingestion functions, architected a Terraform-managed test sandbox for safe pipeline experimentation, and built an automated monitoring framework that proactively catches Dataform job failures across the broader "Customer 360" landscape.</p>
                                     </div>
 
                                     <div class="resume__project">
