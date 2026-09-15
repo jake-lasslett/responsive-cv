@@ -46,6 +46,9 @@
 
 html {
   scroll-behavior: smooth;
+  /* Keep anchored sections clear of the fixed nav when jumping between them */
+  scroll-padding-top: 6rem;
+  scroll-padding-bottom: 6rem;
 }
 
 body {
@@ -159,6 +162,12 @@ body.dark-theme {
   z-index: var(--z-fixed);
   padding-block: 1rem;
   pointer-events: none;
+  transition: transform .35s ease;
+}
+
+/* Auto-hidden state (toggled via JS while scrolling down) */
+.header--hidden {
+  transform: translateY(-140%);
 }
 
 .nav {
@@ -500,6 +509,10 @@ body.dark-theme {
         top: initial;
         bottom: 0;
         padding-bottom: 1.5rem;
+    }
+    /* On mobile the nav is docked at the bottom, so hide it downward */
+    .header--hidden {
+        transform: translateY(140%);
     }
     .nav {
         width: 90%;

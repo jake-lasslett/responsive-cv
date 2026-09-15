@@ -22,6 +22,25 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   window.addEventListener('scroll', debounce(scrollUp));
 
+  /*=============== AUTO-HIDE NAV WHILE SCROLLING DOWN ===============*/
+  // Frees up reading space: the floating nav slides away as you scroll down
+  // through the content and reappears the moment you scroll back up.
+  const header = document.getElementById('header');
+  if (header) {
+    let lastScrollY = window.scrollY;
+    const updateNavVisibility = () => {
+      const current = window.scrollY;
+      // Ignore tiny jitters; only react to deliberate scrolling
+      if (Math.abs(current - lastScrollY) > 6) {
+        const scrollingDown = current > lastScrollY;
+        // Never hide near the very top so the nav is always there to start with
+        header.classList.toggle('header--hidden', scrollingDown && current > 250);
+        lastScrollY = current;
+      }
+    };
+    window.addEventListener('scroll', updateNavVisibility, { passive: true });
+  }
+
   /*=============== SCROLL SECTIONS ACTIVE LINK (OPTIMIZED) ===============*/
   const sections = document.querySelectorAll('section[id]');
   const observer = new IntersectionObserver((entries) => {
