@@ -1,8 +1,15 @@
-/*=============== GOOGLE FONTS ===============*/
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap");
+/*=============== FONTS (self-hosted Manrope, latin subset, variable weight) ===============*/
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("../fonts/manrope-latin.woff2") format("woff2");
+}
 
 /*=============== VARIABLES CSS ===============*/
 :root {
+  color-scheme: light;
   --header-height: 4.5rem;
 
   /*========== Google Professional Palette (Light Mode - Default) ==========*/
@@ -80,11 +87,28 @@ img {
   height: auto;
 }
 
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+/* Inline SVG icons (sprite in index.html) sized and coloured like text */
+.icon {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  flex-shrink: 0;
+  vertical-align: -0.125em;
+}
+
 /*=============== THEME ===============*/
 .change-theme {
+  display: flex;
   font-size: 1.25rem;
   color: var(--title-color);
-  cursor: pointer;
   transition: color .3s;
 }
 
@@ -92,8 +116,15 @@ img {
     color: var(--primary-color);
 }
 
-body.dark-theme {
-  --primary-color: #8ab4f8; 
+/* Moon shows in dark mode, sun in light mode (as before) */
+.theme-icon--moon,
+.dark-theme .theme-icon--sun { display: none; }
+.dark-theme .theme-icon--moon { display: block; }
+
+/* The theme class sits on <html> so the head script can set it before paint */
+.dark-theme {
+  color-scheme: dark;
+  --primary-color: #8ab4f8;
   --secondary-color: #81c995;
   --accent-color: #fde293;
   --error-color: #f28b82;
@@ -124,6 +155,7 @@ body.dark-theme {
 
 .section__title {
   width: max-content;
+  max-width: 100%;
   font-size: var(--h2-font-size);
   color: var(--primary-color);
   position: relative;
@@ -202,6 +234,7 @@ body.dark-theme {
 }
 
 .nav__link {
+  display: flex;
   font-size: 1.1rem;
   color: var(--text-color);
 }
@@ -250,6 +283,7 @@ body.dark-theme {
 
 .home__profession {
     font-size: var(--biggest-font-size);
+    font-weight: var(--font-bold);
     color: var(--primary-color);
     line-height: 1.1;
 }
@@ -382,9 +416,107 @@ body.dark-theme {
     margin-bottom: 0.5rem;
 }
 
-.resume__title i {
+.resume__title .icon {
     color: var(--secondary-color);
     margin-right: 0.5rem;
+}
+
+/*=============== SKILL HIGHLIGHTING ===============*/
+.skills__hint {
+    font-size: var(--small-font-size);
+    margin: -1rem 0 1.25rem;
+}
+
+.skill {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    font-weight: var(--font-bold);
+    border-radius: 0.5rem;
+    padding: 0.15rem 0.4rem;
+    margin-left: -0.4rem;
+    transition: color .3s, background-color .3s;
+}
+
+.skill:hover,
+.skill[aria-pressed="true"] {
+    color: var(--primary-color);
+}
+
+.skill[aria-pressed="true"] {
+    background-color: var(--container-color);
+}
+
+[data-skills] {
+    position: relative;
+    transition: opacity .3s;
+}
+
+.is-filtering [data-skills]:not(.is-match) {
+    opacity: 0.35;
+}
+
+/* Accent bar beside each highlighted role or project */
+.is-match::before {
+    content: "";
+    position: absolute;
+    left: -0.85rem;
+    top: 0.2rem;
+    bottom: 0.2rem;
+    width: 3px;
+    border-radius: 3px;
+    background-color: var(--accent-color);
+}
+
+/*=============== HOW THIS PAGE IS SERVED ===============*/
+.flow {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 1rem;
+    list-style: none;
+}
+
+.flow__step {
+    position: relative;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    background-color: var(--sidebar-color);
+}
+
+.flow__step strong {
+    display: block;
+    color: var(--title-color);
+}
+
+.flow__step small {
+    display: block;
+    font-size: var(--tiny-font-size);
+}
+
+.flow__step + .flow__step::before {
+    content: "↓" / "";
+    position: absolute;
+    top: -1.25rem;
+    left: 1rem;
+    line-height: 1.25rem;
+    color: var(--accent-color);
+    font-weight: var(--font-bold);
+}
+
+@media screen and (min-width: 1024px) {
+    .flow {
+        grid-auto-flow: column;
+        grid-auto-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .flow__step + .flow__step::before {
+        content: "→" / "";
+        top: 50%;
+        left: -1.2rem;
+        transform: translateY(-50%);
+    }
 }
 
 .resume__data {
@@ -411,12 +543,9 @@ body.dark-theme {
     border-top: 1px solid var(--border-color);
 }
 
-.footer--print {
-    display: none;
-}
-
 .footer__container {
     display: grid;
+    font-style: normal; /* <address> is italic by default */
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
 }
@@ -431,15 +560,16 @@ body.dark-theme {
 /*=============== SCROLL BAR & SCROLL UP ===============*/
 ::-webkit-scrollbar {
   width: .6rem;
-  background-color: #e2e2e6;
+  background-color: var(--sidebar-color);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #c4c6cf;
+  background-color: var(--border-color);
   border-radius: .5rem;
 }
 
 .scrollup {
+  display: flex;
   position: fixed;
   right: 1.5rem;
   bottom: -50%;
@@ -483,7 +613,7 @@ body.dark-theme {
     .home__star-2 { bottom: 0; right: 0; transform: translate(50%, 50%); }
     
     .resume__body { 
-        grid-template-columns: 1fr; 
+        grid-template-columns: minmax(0, 1fr); 
         gap: 1rem;
         padding: 1.5rem;
     }
@@ -509,6 +639,10 @@ body.dark-theme {
         top: initial;
         bottom: 0;
         padding-bottom: 1.5rem;
+    }
+    /* Keep the scroll-up button clear of the bottom-docked nav */
+    .show-scroll {
+        bottom: 6.5rem;
     }
     /* On mobile the nav is docked at the bottom, so hide it downward */
     .header--hidden {
@@ -539,6 +673,7 @@ body.dark-theme {
     }
     .nav {
         justify-content: center;
+        gap: 1rem;
     }
 }
 
@@ -549,7 +684,11 @@ body.dark-theme {
     body { background-color: #ffffff !important; color: #3c4043 !important; font-size: 10pt; line-height: 1.4; padding-bottom: 0 !important; }
     
     /* 2. Hide UI Elements */
-    .header, .nav, .scrollup, .change-theme, .about__button, .home__star-1, .home__star-2, .footer--web { display: none !important; }
+    .header, .nav, .scrollup, .change-theme, .about__button, .home__star-1, .home__star-2, .skills__hint, .web-only { display: none !important; }
+
+    /* Ignore any skill highlight that is active when printing */
+    [data-skills] { opacity: 1 !important; }
+    .is-match::before { display: none !important; }
     
     /* 3. Layout Flattening */
     .resume { 
@@ -620,7 +759,7 @@ body.dark-theme {
     }
     
     .resume__title { font-size: 11pt !important; color: #202124 !important; }
-    .resume__title i { display: none !important; }
+    .resume__title .icon { display: none !important; }
     .resume__data { padding-left: 0 !important; color: #3c4043 !important; margin-bottom: 1rem !important; }
     .resume__data span { color: #1a73e8 !important; font-weight: bold !important; }
     .resume__data p { color: #3c4043 !important; }
@@ -640,8 +779,35 @@ body.dark-theme {
     a, .resume__button-link { color: #1a73e8 !important; text-decoration: underline !important; font-weight: bold !important; }
     
     /* 7. Footer */
-    .footer--print { display: block !important; padding: 1.5rem !important; border-top: 1px solid #dadce0 !important; margin-top: 1rem !important; background-color: #f1f3f4 !important; }
-    .footer__container { grid-template-columns: repeat(4, 1fr) !important; gap: 1rem !important; }
+    .footer { padding: 1.5rem !important; border-top: 1px solid #dadce0 !important; margin-top: 1rem !important; background-color: #f1f3f4 !important; }
+    .footer__container { grid-template-columns: repeat(3, 1fr) !important; gap: 1rem !important; }
     .footer__title { color: #1a73e8 !important; font-weight: bold !important; }
     .footer__info, .footer__link { color: #3c4043 !important; }
+
+    /* 8. Compact layout: fit on about two A4 pages, keep headings with their text */
+    @page { size: A4; margin: 12mm 0; }
+    .resume { width: 100% !important; max-width: none !important; }
+    .home { padding: 1rem 1.5rem !important; margin-bottom: 0.5rem !important; }
+    .section { padding-block: 0.4rem !important; }
+    .section__title { margin-bottom: 0.6rem !important; }
+    .about__container p { margin-bottom: 0.5rem !important; }
+    .about__buttons { margin-top: 0 !important; }
+    .grid { gap: 0.6rem !important; }
+    .resume__data { margin-bottom: 0.4rem !important; }
+    .resume__project { margin-top: 0.5rem !important; }
+    .resume__title { margin-bottom: 0.2rem !important; }
+    .skills__list { gap: 0.2rem 0.5rem !important; }
+    .skills__list .resume__title { margin-bottom: 0 !important; }
+
+    /* Education, certifications and references as compact three-column rows */
+    .education__container, .certificates__container, .references__container {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    h2, h3, h4 { break-after: avoid !important; page-break-after: avoid !important; }
+    .resume__project, .projects__container > li, .experience__container > li[data-skills],
+    .education__container > li, .certificates__container > li, .references__container > div {
+        break-inside: avoid !important; page-break-inside: avoid !important;
+    }
+    .footer { break-inside: avoid !important; }
 }
