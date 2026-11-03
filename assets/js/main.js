@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             : scrollUpButton.classList.remove('show-scroll');
     }
   };
-  window.addEventListener('scroll', debounce(scrollUp));
+  window.addEventListener('scroll', debounce(scrollUp), { passive: true });
 
   /*=============== AUTO-HIDE NAV WHILE SCROLLING DOWN ===============*/
   // Frees up reading space: the floating nav slides away as you scroll down
@@ -59,36 +59,84 @@ document.addEventListener('DOMContentLoaded', () => {
   sections.forEach(section => observer.observe(section));
 
   /*=============== DARK LIGHT THEME ===============*/
+  // The initial theme is applied by the inline script in <head> to avoid a flash.
+  // Only an explicit click saves a choice; otherwise the system setting is followed.
   const themeButton = document.getElementById('theme-button');
+  const root = document.documentElement;
   const darkTheme = 'dark-theme';
-  const sunIcon = 'ri-sun-line';
-  const moonIcon = 'ri-moon-line';
-  const savedTheme = localStorage.getItem('selected-theme');
 
-  const applyTheme = (theme) => {
-    document.body.classList.toggle(darkTheme, theme === 'dark');
+  const syncThemeButton = () => {
     if (themeButton) {
-      themeButton.classList.toggle(sunIcon, theme !== 'dark');
-      themeButton.classList.toggle(moonIcon, theme === 'dark');
+      themeButton.setAttribute('aria-pressed', String(root.classList.contains(darkTheme)));
     }
-    localStorage.setItem('selected-theme', theme);
   };
-  
-  applyTheme(savedTheme || 'dark'); // Default to dark mode if no theme is saved
+  syncThemeButton();
 
   if (themeButton) {
     themeButton.addEventListener('click', () => {
-      const newTheme = document.body.classList.contains(darkTheme) ? 'light' : 'dark';
-      applyTheme(newTheme);
+      const isDark = root.classList.toggle(darkTheme);
+      syncThemeButton();
+      try {
+        localStorage.setItem('selected-theme', isDark ? 'dark' : 'light');
+      } catch (e) {
+        // Storage can be blocked (private mode); the toggle still works for this visit
+      }
     });
   }
-  
-  /*=============== GENERATE PDF ===============*/
-  const pdfButton = document.getElementById('download-pdf-btn');
-  if (pdfButton) {
-    pdfButton.addEventListener('click', () => {
-      window.print();
+
+  /*=============== SKILL HIGHLIGHTING ===============*/
+  // Picking a skill highlights every role or project tagged with it (data-skills)
+  // and fades the rest. Picking it again, or pressing Escape, clears it.
+  const skillButtons = document.querySelectorAll('.skill');
+  const taggedItems = document.querySelectorAll('[data-skills]');
+  const skillsHint = document.getElementById('skills-hint');
+  const defaultHint = skillsHint ? skillsHint.textContent : '';
+  let activeSkill = null;
+
+  const selectSkill = (skill, button) => {
+    activeSkill = skill === activeSkill ? null : skill;
+    document.body.classList.toggle('is-filtering', activeSkill !== null);
+
+    const matches = [];
+    taggedItems.forEach(item => {
+      const isMatch = activeSkill !== null && item.dataset.skills.split(' ').includes(activeSkill);
+      item.classList.toggle('is-match', isMatch);
+      if (isMatch) matches.push(item);
     });
+    skillButtons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.skill === activeSkill)));
+
+    if (skillsHint) {
+      if (activeSkill === null) {
+        skillsHint.textContent = defaultHint;
+      } else {
+        const label = button.textContent.trim();
+        const places = matches.length === 1 ? 'place' : 'places';
+        skillsHint.textContent = `${label}: ${matches.length} ${places} highlighted. Pick it again to clear.`;
+      }
+    }
+
+    // Bring the first match into view if it is off screen (e.g. skills sit below content on mobile)
+    const first = matches[0];
+    if (first) {
+      const rect = first.getBoundingClientRect();
+      if (rect.top < 0 || rect.top > window.innerHeight * 0.8) {
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        first.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+      }
+    }
+  };
+
+  skillButtons.forEach(button => {
+    button.addEventListener('click', () => selectSkill(button.dataset.skill, button));
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && activeSkill !== null) {
+      selectSkill(activeSkill);
+    }
+  });
+
+});
   }
 
 });

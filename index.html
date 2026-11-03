@@ -7,35 +7,86 @@
     <title>Jake Lasslett - Solution Architect</title>
     <meta name="description" content="Solution Architect at PMY Group, based in Melbourne. Designing cloud data platforms for major sports, venue and entertainment clients across GCP, AWS and Azure.">
     <meta name="author" content="Jake Lasslett">
+    <link rel="canonical" href="https://cv.jukcore.xyz/">
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://jakelasslett.netlify.app/">
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://cv.jukcore.xyz/">
     <meta property="og:title" content="Jake Lasslett - Solution Architect">
     <meta property="og:description" content="Solution Architect at PMY Group, delivering scalable, multi-cloud data platforms and AI-enabled solutions for sports and entertainment clients.">
-    <meta property="og:image" content="https://jakelasslett.netlify.app/assets/img/preview.png">
+    <meta property="og:image" content="https://cv.jukcore.xyz/assets/img/preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Jake Lasslett, Solution Architect">
+    <meta name="twitter:card" content="summary_large_image">
 
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+    <!-- Apply the saved or system theme before first paint, so there is no flash -->
+    <script>
+        (function () {
+            var theme;
+            try { theme = localStorage.getItem('selected-theme'); } catch (e) {}
+            if (!theme) theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+            if (theme === 'dark') document.documentElement.classList.add('dark-theme');
+        })();
+    </script>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.4.0/remixicon.css" crossorigin="">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Jake Lasslett",
+        "jobTitle": "Solution Architect",
+        "worksFor": { "@type": "Organization", "name": "PMY Group" },
+        "url": "https://cv.jukcore.xyz/",
+        "image": "https://cv.jukcore.xyz/assets/img/perfil.webp",
+        "address": { "@type": "PostalAddress", "addressLocality": "Melbourne", "addressRegion": "VIC", "addressCountry": "AU" },
+        "alumniOf": [
+            { "@type": "CollegeOrUniversity", "name": "James Cook University" },
+            { "@type": "CollegeOrUniversity", "name": "La Trobe University" }
+        ],
+        "knowsAbout": ["Google Cloud", "BigQuery", "Data architecture", "Terraform", "Dataform", "dbt", "Python", "SQL"],
+        "sameAs": ["https://www.linkedin.com/in/jakelasslett/", "https://github.com/jake-lasslett"]
+    }
+    </script>
+
+    <link rel="icon" href="assets/img/favicon.png" type="image/png">
+    <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
-<body class="dark-theme">
+<body>
+    <!-- Icons from Remix Icon 3.4.0 (Apache License 2.0, https://remixicon.com) -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+        <symbol id="i-home" viewBox="0 0 24 24"><path d="M19 21.0001H5C4.44772 21.0001 4 20.5524 4 20.0001V11.0001L1 11.0001L11.3273 1.61162C11.7087 1.26488 12.2913 1.26488 12.6727 1.61162L23 11.0001L20 11.0001V20.0001C20 20.5524 19.5523 21.0001 19 21.0001ZM6 19.0001H18V9.15757L12 3.70302L6 9.15757V19.0001Z"/></symbol>
+        <symbol id="i-user" viewBox="0 0 24 24"><path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z"/></symbol>
+        <symbol id="i-file-list" viewBox="0 0 24 24"><path d="M20 22H4C3.44772 22 3 21.5523 3 21V3C3 2.44772 3.44772 2 4 2H20C20.5523 2 21 2.44772 21 3V21C21 21.5523 20.5523 22 20 22ZM19 20V4H5V20H19ZM8 7H16V9H8V7ZM8 11H16V13H8V11ZM8 15H16V17H8V15Z"/></symbol>
+        <symbol id="i-briefcase" viewBox="0 0 24 24"><path d="M7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V6C2 5.44772 2.44772 5 3 5H7ZM15 7H9V19H15V7ZM7 7H4V19H7V7ZM17 7V19H20V7H17ZM9 3V5H15V3H9Z"/></symbol>
+        <symbol id="i-function" viewBox="0 0 24 24"><path d="M3 3H11V11H3V3ZM3 13H11V21H3V13ZM13 3H21V11H13V3ZM13 13H21V21H13V13ZM15 5V9H19V5H15ZM15 15V19H19V15H15ZM5 5V9H9V5H5ZM5 15V19H9V15H5Z"/></symbol>
+        <symbol id="i-book" viewBox="0 0 24 24"><path d="M21 18H6C5.44772 18 5 18.4477 5 19C5 19.5523 5.44772 20 6 20H21V22H6C4.34315 22 3 20.6569 3 19V4C3 2.89543 3.89543 2 5 2H21V18ZM5 16.05C5.16156 16.0172 5.32877 16 5.5 16H19V4H5V16.05ZM16 9H8V7H16V9Z"/></symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24"><path d="M10 7C10 10.866 13.134 14 17 14C18.9584 14 20.729 13.1957 21.9995 11.8995C22 11.933 22 11.9665 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C12.0335 2 12.067 2 12.1005 2.00049C10.8043 3.27098 10 5.04157 10 7ZM4 12C4 16.4183 7.58172 20 12 20C15.0583 20 17.7158 18.2839 19.062 15.7621C18.3945 15.9187 17.7035 16 17 16C12.0294 16 8 11.9706 8 7C8 6.29648 8.08133 5.60547 8.2379 4.938C5.71611 6.28423 4 8.9417 4 12Z"/></symbol>
+        <symbol id="i-sun" viewBox="0 0 24 24"><path d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM11 1H13V4H11V1ZM11 20H13V23H11V20ZM3.51472 4.92893L4.92893 3.51472L7.05025 5.63604L5.63604 7.05025L3.51472 4.92893ZM16.9497 18.364L18.364 16.9497L20.4853 19.0711L19.0711 20.4853L16.9497 18.364ZM19.0711 3.51472L20.4853 4.92893L18.364 7.05025L16.9497 5.63604L19.0711 3.51472ZM5.63604 16.9497L7.05025 18.364L4.92893 20.4853L3.51472 19.0711L5.63604 16.9497ZM23 11V13H20V11H23ZM4 11V13H1V11H4Z"/></symbol>
+        <symbol id="i-download" viewBox="0 0 24 24"><path d="M3 19H21V21H3V19ZM13 13.1716L19.0711 7.1005L20.4853 8.51472L12 17L3.51472 8.51472L4.92893 7.1005L11 13.1716V2H13V13.1716Z"/></symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M12.1717 12.0005L9.34326 9.17203L10.7575 7.75781L15.0001 12.0005L10.7575 16.2431L9.34326 14.8289L12.1717 12.0005Z"/></symbol>
+        <symbol id="i-external" viewBox="0 0 24 24"><path d="M10 6V8H5V19H16V14H18V20C18 20.5523 17.5523 21 17 21H4C3.44772 21 3 20.5523 3 20V7C3 6.44772 3.44772 6 4 6H10ZM21 3V11H19L18.9999 6.413L11.2071 14.2071L9.79289 12.7929L17.5849 5H13V3H21Z"/></symbol>
+        <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12.9999 7.82843V20H10.9999V7.82843L5.63589 13.1924L4.22168 11.7782L11.9999 4L19.778 11.7782L18.3638 13.1924L12.9999 7.82843Z"/></symbol>
+    </svg>
+
     <div class="resume container">
         <header class="header" id="header">
-            <nav class="nav container">
-                <a href="#" class="nav__logo">Jake</a>
+            <nav class="nav container" aria-label="Sections">
+                <a href="#home" class="nav__logo">Jake</a>
                 <div class="nav__menu">
                     <ul class="nav__list">
-                        <li class="nav__item"><a href="#home" class="nav__link active-link"><i class="ri-home-2-line"></i></a></li>
-                        <li class="nav__item"><a href="#about" class="nav__link"><i class="ri-user-line"></i></a></li>
-                        <li class="nav__item"><a href="#skills" class="nav__link"><i class="ri-file-list-line"></i></a></li>
-                        <li class="nav__item"><a href="#experience" class="nav__link"><i class="ri-briefcase-3-line"></i></a></li>
-                        <li class="nav__item"><a href="#projects" class="nav__link"><i class="ri-function-line"></i></a></li>
-                        <li class="nav__item"><a href="#education" class="nav__link"><i class="ri-book-2-line"></i></a></li>
+                        <li class="nav__item"><a href="#home" class="nav__link active-link" aria-label="Home"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg></a></li>
+                        <li class="nav__item"><a href="#about" class="nav__link" aria-label="About"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg></a></li>
+                        <li class="nav__item"><a href="#skills" class="nav__link" aria-label="Skills"><svg class="icon" aria-hidden="true"><use href="#i-file-list"/></svg></a></li>
+                        <li class="nav__item"><a href="#experience" class="nav__link" aria-label="Experience"><svg class="icon" aria-hidden="true"><use href="#i-briefcase"/></svg></a></li>
+                        <li class="nav__item"><a href="#projects" class="nav__link" aria-label="Projects"><svg class="icon" aria-hidden="true"><use href="#i-function"/></svg></a></li>
+                        <li class="nav__item"><a href="#education" class="nav__link" aria-label="Education"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg></a></li>
                     </ul>
                 </div>
-                <i class="ri-moon-line ri-sun-line change-theme" id="theme-button"></i>
+                <button type="button" class="change-theme" id="theme-button" aria-label="Dark mode">
+                    <svg class="icon theme-icon--moon" aria-hidden="true"><use href="#i-moon"/></svg>
+                    <svg class="icon theme-icon--sun" aria-hidden="true"><use href="#i-sun"/></svg>
+                </button>
             </nav>
         </header>
 
@@ -48,12 +99,12 @@
                     </div>
                     <div class="home__blob">
                         <div class="home__perfil">
-                            <img src="assets/img/perfil.png" loading="lazy" alt="Profile picture of Jake Lasslett" class="home__img">
+                            <img src="assets/img/perfil.webp" width="400" height="400" fetchpriority="high" alt="Profile picture of Jake Lasslett" class="home__img">
                         </div>
-                        <svg class="home__star-1" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><path d="M25 0L31.7523 18.2477L50 25L31.7523 31.7523L25 50L18.2477 31.7523L0 25L18.2477 18.2477L25 0Z" /></svg>
-                        <svg class="home__star-2" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><path d="M25 0L31.7523 18.2477L50 25L31.7523 31.7523L25 50L18.2477 31.7523L0 25L18.2477 18.2477L25 0Z" /></svg>
+                        <svg class="home__star-1" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M25 0L31.7523 18.2477L50 25L31.7523 31.7523L25 50L18.2477 31.7523L0 25L18.2477 18.2477L25 0Z" /></svg>
+                        <svg class="home__star-2" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M25 0L31.7523 18.2477L50 25L31.7523 31.7523L25 50L18.2477 31.7523L0 25L18.2477 18.2477L25 0Z" /></svg>
                     </div>
-                    <h1 class="home__profession">SOLUTION<br>ARCHITECT</h1>
+                    <p class="home__profession">SOLUTION<br>ARCHITECT</p>
                 </div>
             </section>
 
@@ -64,9 +115,9 @@
                         <div class="about__container">
                             <p>Hi, I'm Jake! 👋 I'm a Google Cloud specialist who loves building data solutions that actually make life easier for people. I'm at my best when I'm taking a complex business problem and turning it into something elegant, efficient, and - most importantly - useful.</p>
                             <p>As a Solution Architect at PMY Group, I design cloud data platforms for some of the biggest names in sport, venues and entertainment - from the AFL and Brisbane Broncos to the Australian Grand Prix, Tennis Australia and Euroleague Basketball. I work fluently across GCP, AWS and Azure, and I've delivered every engagement model going: rapid POCs and executive demos through to full T&M, fixed-fee builds and strategic tender responses. Whether I'm architecting the platform or deep in the data engineering, I focus on delivering work that lasts.</p>
-                            <p>When I'm not behind a screen at work, you'll probably find me tinkering with my home server - I recently spun up a React.js and Tailwind app in Docker just to master GTM and GA4 tracking - staying active with some exercise, or spending time with my partner as we start the exciting journey of growing our family.</p>
+                            <p>When I'm not behind a screen at work, you'll probably find me tinkering with my home server - I recently spun up a Next.js app in Docker just to master GTM and GA4 tracking - staying active with some exercise, or spending time with my partner as we start the exciting journey of growing our family.</p>
                             <div class="about__buttons">
-                                <a class="about__button" id="download-pdf-btn">Download Resume <i class="ri-download-line"></i></a>
+                                <a href="assets/pdf/Jake_Lasslett-CV.pdf" download="Jake_Lasslett-CV.pdf" class="about__button">Download Resume <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg></a>
                                 <ul class="about__social">
                                     <li><a href="https://github.com/jake-lasslett" target="_blank" class="about__social-link">Github</a></li>
                                     <li><a href="https://www.linkedin.com/in/jakelasslett/" target="_blank" class="about__social-link">Linkedin</a></li>
@@ -79,19 +130,19 @@
                         <h2 class="section__title">My journey so far</h2>
                         <ul class="experience__container grid">
                             <li>
-                                <h2 class="resume__title"><i class="ri-arrow-drop-right-line"></i> Solution Architect</h2>
+                                <h3 class="resume__title"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg> Solution Architect</h3>
                                 <div class="resume__data">
                                     <span>PMY Group / 2026 - Present</span>
                                     <p>As a Solution Architect in PMY's data &amp; technology practice, I design and deliver cloud data platforms for major sports, venue and entertainment clients across GCP, AWS and Azure - including the AFL, Brisbane Broncos, Australian Grand Prix Corporation, Tennis Australia, Melbourne Park and Football Victoria. I author the solution architecture documents that anchor these builds, and I lead delivery across the full spectrum: serverless ingestion pipelines, warehouse-native ELT, single customer views and reusable, productised platform assets.</p>
 
-                                    <div class="resume__project">
-                                        <h3 class="resume__project-title">Euroleague Basketball — Live Venue-to-Cloud Stats Ingestion</h3>
+                                    <div class="resume__project" data-skills="gcp sql architecture consulting">
+                                        <h4 class="resume__project-title">Euroleague Basketball — Live Venue-to-Cloud Stats Ingestion</h4>
                                         <span class="resume__project-meta">Remote (Europe) | 2026 | Proof of Concept &amp; Solution Design</span>
                                         <p>I designed and built a serverless GCP pipeline that ingests live play-by-play directly from the venue, running in parallel with a legacy on-prem SQL Server system and reimplementing its stored-procedure statistics logic in the cloud. Built on Cloud Run, Pub/Sub (per-game ordering keys), Cloud SQL and BigQuery with Cloud Armor and KMS, it scales to ~20 concurrent games and enforces a contractual, GDPR-ready data-exposure delay. I authored the full Solution Architecture Document.</p>
                                     </div>
 
-                                    <div class="resume__project">
-                                        <h3 class="resume__project-title">Football Victoria — Unified Data Platform (Foundations)</h3>
+                                    <div class="resume__project" data-skills="gcp sql architecture dataform terraform cicd">
+                                        <h4 class="resume__project-title">Football Victoria — Unified Data Platform (Foundations)</h4>
                                         <span class="resume__project-meta">Melbourne, Australia | 2026 | Fixed-Fee Delivery</span>
                                         <p>I delivered Phase 1 of a lean, governed Unified Data Platform on GCP, tailored to the needs of a smaller organisation. Cloud Run jobs and Cloud Scheduler land five sources (MailChimp, Play Football, Go Football, DRIBL, INTIX) into a GCS/BigQuery medallion architecture, with Dataform transforms building a Single Customer View and governed CDP, participation and ticketing datamarts. Provisioned end-to-end with Terraform (Cloud Foundation Fabric) and GitHub Actions CI/CD via Workload Identity Federation.</p>
                                     </div>
@@ -99,52 +150,52 @@
                                 </div>
                             </li>
                             <li>
-                                <h2 class="resume__title"><i class="ri-arrow-drop-right-line"></i> Google Data Engineer & Architect</h2>
+                                <h3 class="resume__title"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg> Google Data Engineer & Architect</h3>
                                 <div class="resume__data">
                                     <span>NCS Group Australia / 2025 - 2026</span>
                                     <p>As a Technical Leader within the Google Solutions Practice, I drove architectural excellence by developing modular, reusable assets and standardised service delivery frameworks. Beyond project execution, I played a critical role in strategic pre-sales and high-value tender responses - including leading a $5M+ AI-enabled warehouse architecture proposal in Singapore. I was a key contributor to internal knowledge sharing, building the technical blueprints that enabled our teams to deliver consistent, scalable cloud outcomes for global enterprise clients.</p>
 
-                                    <div class="resume__project">
-                                        <h3 class="resume__project-title">National Basketball League (NBL) — Platform Foundations &amp; Reliability</h3>
+                                    <div class="resume__project" data-skills="gcp terraform dataform">
+                                        <h4 class="resume__project-title">National Basketball League (NBL) — Platform Foundations &amp; Reliability</h4>
                                         <span class="resume__project-meta">Melbourne, Australia | 2025 – 2026 | Managed Service Agreement</span>
                                         <p>I contributed to the engineering foundations of the NBL's cloud-native GCP ecosystem, focusing on platform reliability and ingestion scalability. I developed robust, high-performance ingestion functions, architected a Terraform-managed test sandbox for safe pipeline experimentation, and built an automated monitoring framework that proactively catches Dataform job failures across the broader "Customer 360" landscape.</p>
                                     </div>
 
-                                    <div class="resume__project">
-                                        <h3 class="resume__project-title">Senex Energy — Data Platform Modernisation (MSP)</h3>
+                                    <div class="resume__project" data-skills="gcp python sql terraform cicd">
+                                        <h4 class="resume__project-title">Senex Energy — Data Platform Modernisation (MSP)</h4>
                                         <span class="resume__project-meta">Brisbane, Australia (Remote) | Q4 2025 – 2026 | Managed Service Agreement</span>
                                         <p>In a complex data environment (Bitbucket, Terraform, Python, SQL), I led the mandatory migration of 60+ Cloud Functions to Python 3.13 and Gen 2. I architected a shift from a monolithic repository to a decoupled Micro-Repository pattern, implementing a robust GitOps workflow using Atlantis and Bitbucket Pipelines. This "shift-left" approach has significantly improved deployment safety and visibility across the function inventory.</p>
                                     </div>
 
-                                    <div class="resume__project">
-                                        <h3 class="resume__project-title">Bega Group — B2B Telemetry Foundation</h3>
+                                    <div class="resume__project" data-skills="consulting">
+                                        <h4 class="resume__project-title">Bega Group — B2B Telemetry Foundation</h4>
                                         <span class="resume__project-meta">Victoria, Australia | Q4 2025 – 2026</span>
                                         <p>I led the greenfield implementation of a custom telemetry framework for the 'My Bega' B2B portal. This involved conducting deep-dive discovery workshops to map complex customer journeys and building a robust GTM/GA4 architecture from the ground up. I developed bespoke tracking for asynchronous claim submissions and standing order management, establishing a dual-container JSON-promotion workflow to ensure production stability.</p>
                                     </div>
 
-                                    <div class="resume__project">
-                                        <h3 class="resume__project-title">Commonwealth Superannuation Corp — Enterprise Governance</h3>
+                                    <div class="resume__project" data-skills="consulting">
+                                        <h4 class="resume__project-title">Commonwealth Superannuation Corp — Enterprise Governance</h4>
                                         <span class="resume__project-meta">Multiple Australian Locations | Q4 2025 – 2026</span>
                                         <p>I served as a strategic technical mentor within a highly regulated environment, providing both governance structure and technical capability uplift. I designed a mandatory Enterprise GTM Governance Model featuring a 3-gate review process and strict PII masking protocols. Additionally, I successfully integrated Sitecore Personalize, establishing a robust "Identity Bridge" with GA4 for enterprise personalisation.</p>
                                     </div>
                                 </div>
                             </li>
-                            <li>
-                                <h2 class="resume__title"><i class="ri-arrow-drop-right-line"></i>Data Analyst</h2>
+                            <li data-skills="sql">
+                                <h3 class="resume__title"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Data Analyst</h3>
                                 <div class="resume__data">
                                     <span>Wesfarmers Health / 2022 - 2025</span>
                                     <p>I spearheaded a customer segmentation initiative using BigQuery, developed real-time reporting ecosystems with Looker, and engineered unified data models to drive business insights.</p>
                                 </div>
                             </li>
-                            <li>
-                                <h2 class="resume__title"><i class="ri-arrow-drop-right-line"></i>Stability Trial Chemist</h2>
+                            <li data-skills="">
+                                <h3 class="resume__title"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Stability Trial Chemist</h3>
                                 <div class="resume__data">
                                     <span>Ego Pharmaceuticals / 2021 - 2022</span>
                                     <p>I conducted complex analytical testing using HPLC, GC, and XRF, and authored comprehensive stability reports for pharmaceutical product compliance.</p>
                                 </div>
                             </li>
-                            <li>
-                                <h2 class="resume__title"><i class="ri-arrow-drop-right-line"></i>Quality Control Specialist</h2>
+                            <li data-skills="">
+                                <h3 class="resume__title"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Quality Control Specialist</h3>
                                 <div class="resume__data">
                                     <span>CosmaxNBT Australia / 2017 - 2021</span>
                                     <p>I managed technical sampling, maintained strict QC documentation, and configured LIMS to help the laboratory run more efficiently.</p>
@@ -152,24 +203,37 @@
                             </li>
                         </ul>
                     </section>
-        
+
                     <section class="projects section" id="projects">
                         <h2 class="section__title">Things I've built</h2>
                         <ul class="projects__container grid">
-                            <li>
-                                <h2 class="resume__title"><i class="ri-arrow-drop-right-line"></i>Analytics Playground <a href="https://analytics.jukcore.xyz/" target="_blank" class="resume__button-link"><i class="ri-external-link-line"></i></a></h2>
+                            <li class="web-only" data-skills="architecture">
+                                <h3 class="resume__title"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>This CV, Self-Hosted</h3>
+                                <div class="resume__data">
+                                    <p>You're reading this from a low-power mini PC in my house, not a hosting platform. It runs as one container in the Docker Compose stack I use for my home server. My router has no open ports: requests come in through an outbound-only Cloudflare Tunnel, and the web server only hands out the files this page needs.</p>
+                                    <ol class="flow" aria-label="How this page reaches you">
+                                        <li class="flow__step"><strong>You</strong><small>Your browser</small></li>
+                                        <li class="flow__step"><strong>Cloudflare edge</strong><small>HTTPS and caching</small></li>
+                                        <li class="flow__step"><strong>Cloudflare Tunnel</strong><small>Outbound only, no open ports</small></li>
+                                        <li class="flow__step"><strong>Reverse proxy</strong><small>Routes by hostname</small></li>
+                                        <li class="flow__step"><strong>nginx container</strong><small>Read-only, allowlisted files</small></li>
+                                    </ol>
+                                </div>
+                            </li>
+                            <li data-skills="">
+                                <h3 class="resume__title"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Analytics Playground <a href="https://analytics.jukcore.xyz/" target="_blank" class="resume__button-link" aria-label="Open Analytics Playground"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a></h3>
                                 <div class="resume__data">
                                     <p>I built a production-grade e-commerce prototype called the Analytics Playground to put modern tracking to the test. It’s a sandbox where I’ve implemented the complete GA4 e-commerce funnel - from item views to purchases - using a schema-driven Data Layer in a Next.js environment. It even features serverless instant search and dynamic social cards, proving that rigorous data collection can coexist with a fast, modern user experience.</p>
                                 </div>
                             </li>
-                            <li>
-                                <h2 class="resume__title"><i class="ri-arrow-drop-right-line"></i>Custom Gemini CLI</h2>
+                            <li data-skills="gemini sql">
+                                <h3 class="resume__title"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Custom Gemini CLI</h3>
                                 <div class="resume__data">
                                     <p>I built a high-performance CLI tool using Google Gemini and DuckDB for local AI-powered querying and metadata tagging, which I now use as a blueprint for helping clients with AI enablement.</p>
                                 </div>
                             </li>
-                            <li>
-                                <h2 class="resume__title"><i class="ri-arrow-drop-right-line"></i>Dataform Monitoring Blueprint</h2>
+                            <li data-skills="dataform sql gcp">
+                                <h3 class="resume__title"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Dataform Monitoring Blueprint</h3>
                                 <div class="resume__data">
                                     <p>I developed an automated monitoring solution for BigQuery to give executive teams clear visibility into their cloud spending and resource performance.</p>
                                 </div>
@@ -181,17 +245,18 @@
                 <div class="resume__sidebar">
                     <section class="skills section" id="skills">
                         <h2 class="section__title">My toolkit</h2>
+                        <p class="skills__hint" id="skills-hint" aria-live="polite">Pick a skill to see where I've used it.</p>
                         <div class="skills__container grid">
                             <ul class="skills__list">
-                                <li class="resume__title"><i class="ri-arrow-drop-right-line"></i>Python (Expert)</li>
-                                <li class="resume__title"><i class="ri-arrow-drop-right-line"></i>SQL & BigQuery</li>
-                                <li class="resume__title"><i class="ri-arrow-drop-right-line"></i>GCP (4x Certified)</li>
-                                <li class="resume__title"><i class="ri-arrow-drop-right-line"></i>Data Architecture</li>
-                                <li class="resume__title"><i class="ri-arrow-drop-right-line"></i>Gemini CLI + MCP + Skills</li>
-                                <li class="resume__title"><i class="ri-arrow-drop-right-line"></i>Dataform & dbt</li>
-                                <li class="resume__title"><i class="ri-arrow-drop-right-line"></i>Terraform</li>
-                                <li class="resume__title"><i class="ri-arrow-drop-right-line"></i>CI/CD & GitOps</li>
-                                <li class="resume__title"><i class="ri-arrow-drop-right-line"></i>Consultancy & Pre-sales</li>
+                                <li><button type="button" class="resume__title skill" data-skill="python" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Python (Expert)</button></li>
+                                <li><button type="button" class="resume__title skill" data-skill="sql" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>SQL & BigQuery</button></li>
+                                <li><button type="button" class="resume__title skill" data-skill="gcp" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>GCP (4x Certified)</button></li>
+                                <li><button type="button" class="resume__title skill" data-skill="architecture" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Data Architecture</button></li>
+                                <li><button type="button" class="resume__title skill" data-skill="gemini" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Gemini CLI + MCP + Skills</button></li>
+                                <li><button type="button" class="resume__title skill" data-skill="dataform" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Dataform & dbt</button></li>
+                                <li><button type="button" class="resume__title skill" data-skill="terraform" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Terraform</button></li>
+                                <li><button type="button" class="resume__title skill" data-skill="cicd" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>CI/CD & GitOps</button></li>
+                                <li><button type="button" class="resume__title skill" data-skill="consulting" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Consultancy & Pre-sales</button></li>
                             </ul>
                         </div>
                     </section>
@@ -203,21 +268,21 @@
                                 <h3 class="resume__title">Master of Data Science</h3>
                                 <div class="resume__data">
                                     <span>James Cook University</span>
-                                    <a href="https://www.myequals.net/sharelink/44544868-aa91-47cf-872f-75224fd87ae5/04292d36-195c-4077-a82e-e1e9fe864c48" target="_blank" class="resume__button-link">Verify <i class="ri-external-link-line"></i></a>
+                                    <a href="https://www.myequals.net/sharelink/44544868-aa91-47cf-872f-75224fd87ae5/04292d36-195c-4077-a82e-e1e9fe864c48" target="_blank" class="resume__button-link">Verify <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
                                 </div>
                             </li>
                             <li>
                                 <h3 class="resume__title">Graduate Diploma of Data Science</h3>
                                 <div class="resume__data">
                                     <span>James Cook University</span>
-                                    <a href="https://www.myequals.net/r/sharelink/8b1735f3-a7eb-401f-9f8e-3c0ceb6ec4a8/74da0cc5-af51-43cf-82f6-00fa72527386" target="_blank" class="resume__button-link">Verify <i class="ri-external-link-line"></i></a>
+                                    <a href="https://www.myequals.net/r/sharelink/8b1735f3-a7eb-401f-9f8e-3c0ceb6ec4a8/74da0cc5-af51-43cf-82f6-00fa72527386" target="_blank" class="resume__button-link">Verify <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
                                 </div>
                             </li>
                             <li>
                                 <h3 class="resume__title">Bachelor of Science</h3>
                                 <div class="resume__data">
                                     <span>La Trobe University</span>
-                                    <a href="/assets/pdf/Jake_Bsc_LaTrobe.pdf" target="_blank" class="resume__button-link">View <i class="ri-external-link-line"></i></a>
+                                    <a href="/assets/pdf/Jake_Bsc_LaTrobe.pdf" target="_blank" class="resume__button-link">View <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
                                 </div>
                             </li>
                         </ul>
@@ -229,19 +294,19 @@
                             <li>
                                 <h3 class="resume__title">GCP Prof. Data Engineer</h3>
                                 <div class="resume__data">
-                                    <a href="https://www.credly.com/badges/be137b2b-6776-425c-bfed-6fe5d67d045f/linked_in?t=szoq4l" target="_blank" class="resume__button-link">Verify <i class="ri-external-link-line"></i></a>
+                                    <a href="https://www.credly.com/badges/be137b2b-6776-425c-bfed-6fe5d67d045f/linked_in?t=szoq4l" target="_blank" class="resume__button-link">Verify <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
                                 </div>
                             </li>
                             <li>
                                 <h3 class="resume__title">GCP Prof. Cloud Architect</h3>
                                 <div class="resume__data">
-                                    <a href="https://www.credly.com/badges/c76c9b6c-99ad-440c-9a44-0ae6a20acea6/linked_in?t=sww0ji" target="_blank" class="resume__button-link">Verify <i class="ri-external-link-line"></i></a>
+                                    <a href="https://www.credly.com/badges/c76c9b6c-99ad-440c-9a44-0ae6a20acea6/linked_in?t=sww0ji" target="_blank" class="resume__button-link">Verify <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
                                 </div>
                             </li>
                             <li>
                                 <h3 class="resume__title">Google Analytics Cert.</h3>
                                 <div class="resume__data">
-                                    <a href="https://skillshop.credential.net/dc632108-0f6d-49f9-9898-10ee7d48257d#acc.VvGJgft1" target="_blank" class="resume__button-link">Verify <i class="ri-external-link-line"></i></a>
+                                    <a href="https://skillshop.credential.net/dc632108-0f6d-49f9-9898-10ee7d48257d#acc.VvGJgft1" target="_blank" class="resume__button-link">Verify <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
                                 </div>
                             </li>
                         </ul>
@@ -269,20 +334,16 @@
                 </div>
             </div>
         </main>
-    
+
         <footer class="footer">
             <address class="footer__container">
-                <div>
-                    <h3 class="footer__title">PHONE</h3>
-                    <span class="footer__info">+61 400 532 949</span>
-                </div>
                 <div>
                     <h3 class="footer__title">EMAIL</h3>
                     <a href="mailto:jakelaz94@gmail.com" class="footer__info footer__link">jakelaz94@gmail.com</a>
                 </div>
                 <div>
                     <h3 class="footer__title">WEBSITE</h3>
-                    <a href="https://jakelasslett.netlify.app" target="_blank" class="footer__link">jakelasslett.netlify.app</a>
+                    <a href="https://cv.jukcore.xyz" target="_blank" class="footer__link">cv.jukcore.xyz</a>
                 </div>
                 <div>
                     <h3 class="footer__title">LOCATION</h3>
@@ -292,7 +353,7 @@
         </footer>
     </div>
 
-    <a href="#" class="scrollup" id="scroll-up"><i class="ri-arrow-up-line"></i></a>
+    <a href="#home" class="scrollup" id="scroll-up" aria-label="Back to top"><svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg></a>
     <script src="assets/js/main.js"></script>
 </body>
 </html>

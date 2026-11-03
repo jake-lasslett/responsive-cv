@@ -12,3 +12,11 @@
 💙 Join the channel to see more videos like this. [Bedimcode](https://www.youtube.com/@Bedimcode)
 
 ![preview img](/preview.png)
+
+## Updating the downloadable PDF
+
+The Download Resume button serves `assets/pdf/Jake_Lasslett-CV.pdf`, generated from the page's print styles. After editing `index.html` or the CSS, rebuild it and commit the result:
+
+```bash
+./scripts/build-pdf.sh
+```
